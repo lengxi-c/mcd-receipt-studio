@@ -1,0 +1,84 @@
+<!--
+  占位模板 · 数据存根（结构示例，美术设计待接入）
+  -------------------------------------------------------------------
+  承接当前启用的非点单类小票：积分存折 / 趣味统计。
+  契约详见 TEMPLATE_GUIDE.md；本模板是 summary / stats 两个新数组的用法示范：
+    · data-repeat="summary"  → 行内裸名 label / value
+    · data-repeat="stats"    → 行内裸名 label / value / hint
+  ⚠️ 美术占位：区块已用注释标出，替换视觉时请保留标注与结构。
+-->
+<div class="rct-stub">
+
+  <div class="rct-stub__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <div class="rct-stub__band rct-stub__band--head" data-slot="band" data-editable="false"></div>
+
+  <div class="rct-stub__art" data-slot="header-art" data-editable="false"></div>
+
+  <div class="rct-stub__rule" data-slot="rule" data-editable="false"></div>
+
+  <!-- 品牌字标（原「头部徽标」占位位：v0.4.0 起直接复用字标，见 D-032） -->
+  <div class="rct-stub__brand" data-field="meta.brand" data-editable="false">麦门日记</div>
+
+  <h1 class="rct-stub__title" data-field="meta.title">麦门履历小票</h1>
+  <div class="rct-stub__subtitle" data-field="member.level"></div>
+
+  <!-- 摘要区（积分存折等） -->
+  <dl class="rct-stub__summary" data-repeat="summary" data-if="summary">
+    <div class="rct-stub__summary-row" data-repeat-item>
+      <dt data-field="label">名目</dt>
+      <dd data-field="value">—</dd>
+    </div>
+  </dl>
+
+  <!-- 统计区（趣味数据小票的主体） -->
+  <ul class="rct-stub__stats" data-repeat="stats">
+    <li class="rct-stub__stat" data-repeat-item>
+      <div class="rct-stub__stat-head">
+        <span class="rct-stub__stat-label" data-field="label">统计</span>
+        <span class="rct-stub__stat-value" data-field="value">—</span>
+      </div>
+      <div class="rct-stub__stat-hint" data-field="hint"></div>
+    </li>
+  </ul>
+
+  <!-- 条目区（趣味统计中的门店足迹等） -->
+  <ul class="rct-stub__items" data-repeat="items">
+    <li class="rct-stub__item" data-repeat-item>
+      <span class="rct-stub__item-name" data-field="name">条目</span>
+      <span class="rct-stub__item-spec" data-field="spec"></span>
+    </li>
+  </ul>
+
+  <div class="rct-stub__rule" data-slot="rule" data-editable="false"></div>
+
+  <!-- 手账区 -->
+  <section class="rct-stub__journal">
+    <div class="rct-stub__journal-main">
+      <div class="rct-stub__mood-label" data-field="journal.moodLabel">今天的心情</div>
+      <p class="rct-stub__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+    </div>
+  </section>
+
+  <!-- 签名区：会员编号取自 MCP accountId（真实数据），签名与日期供落款 -->
+  <section class="rct-stub__sign">
+    <div class="rct-stub__no" data-field="meta.receiptNo">NO. —</div>
+    <div class="rct-stub__sign-row">
+      <span class="rct-stub__sign-k" data-editable="false">会员编号</span>
+      <span class="rct-stub__sign-v" data-field="member.no" data-editable="false">No. —</span>
+    </div>
+    <div class="rct-stub__sign-row">
+      <span class="rct-stub__sign-k" data-editable="false">签名</span>
+      <span class="rct-stub__sign-v rct-stub__sign-v--hand" data-field="journal.signature">—— 麦门日记</span>
+    </div>
+    <div class="rct-stub__sign-row">
+      <span class="rct-stub__sign-k" data-editable="false">日期</span>
+      <span class="rct-stub__sign-v" data-field="order.datetime" data-format="date">—</span>
+    </div>
+  </section>
+
+  <footer class="rct-stub__foot">
+    <div class="rct-stub__rule rct-stub__rule--foot" data-slot="rule" data-editable="false"></div>
+    <div class="rct-stub__band rct-stub__band--foot" data-slot="band" data-editable="false"></div>
+  </footer>
+</div>

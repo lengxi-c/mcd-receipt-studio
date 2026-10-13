@@ -1,0 +1,75 @@
+<!--
+  占位模板 · 复古点单存根（结构示例，美术设计待接入）
+  契约同 starter-classic，详见 docs/美术接入指南.md
+  v0.4.1 分层：水印 → 装饰条 → 头图 → 分割线 → 抬头 → …正文… → 签名区 → 票尾分割线 → 尾图收边
+-->
+<div class="rct-retro">
+
+  <div class="rct-retro__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <header class="rct-retro__head">
+    <div class="rct-retro__band rct-retro__band--head" data-slot="band" data-editable="false"></div>
+    <div class="rct-retro__art" data-slot="header-art" data-editable="false"></div>
+    <div class="rct-retro__rule" data-slot="rule" data-editable="false"></div>
+    <div class="rct-retro__brand" data-field="meta.brand" data-editable="false">麦门日记</div>
+    <div class="rct-retro__label" data-editable="false">ORDER STUB</div>
+    <div class="rct-retro__store" data-field="store.name">麦当劳 · 示例门店</div>
+    <div class="rct-retro__addr" data-field="store.address">示例地址</div>
+  </header>
+
+  <div class="rct-retro__body">
+
+    <div class="rct-retro__dates">
+      <div class="rct-retro__date">
+        <span class="rct-retro__k" data-editable="false">DATE</span>
+        <span class="rct-retro__v" data-field="order.datetime" data-format="date">—</span>
+      </div>
+      <div class="rct-retro__date">
+        <span class="rct-retro__k" data-editable="false">TIME</span>
+        <span class="rct-retro__v" data-field="order.datetime" data-format="time">—</span>
+      </div>
+    </div>
+
+    <ul class="rct-retro__items" data-repeat="items">
+      <li class="rct-retro__item" data-repeat-item>
+        <span class="rct-retro__item-name" data-field="name">品项</span>
+        <span class="rct-retro__item-spec" data-field="spec"></span>
+        <span class="rct-retro__item-amt" data-field="amount" data-format="money">0.00</span>
+      </li>
+    </ul>
+
+    <div class="rct-retro__total">
+      <span class="rct-retro__k" data-editable="false">TOTAL</span>
+      <span class="rct-retro__total-num" data-field="amounts.total" data-format="money">0.00</span>
+    </div>
+
+    <div class="rct-retro__journal">
+      <div>
+        <div class="rct-retro__mood-label" data-field="journal.moodLabel">今天的心情</div>
+        <p class="rct-retro__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+      </div>
+    </div>
+
+    <!-- 签名区：会员编号取自 MCP accountId（真实数据），签名与日期供落款 -->
+    <div class="rct-retro__sign">
+      <div class="rct-retro__stamp" data-field="meta.receiptNo">NO. —</div>
+      <div class="rct-retro__sign-row">
+        <span class="rct-retro__sign-k" data-editable="false">会员编号</span>
+        <span class="rct-retro__sign-v" data-field="member.no" data-editable="false">No. —</span>
+      </div>
+      <div class="rct-retro__sign-row">
+        <span class="rct-retro__sign-k" data-editable="false">签名</span>
+        <span class="rct-retro__sign-v rct-retro__sign-v--hand" data-field="journal.signature">—— 麦门日记</span>
+      </div>
+      <div class="rct-retro__sign-row">
+        <span class="rct-retro__sign-k" data-editable="false">日期</span>
+        <span class="rct-retro__sign-v" data-field="order.datetime" data-format="date">—</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="rct-retro__foot">
+    <div class="rct-retro__rule rct-retro__rule--foot" data-slot="rule" data-editable="false"></div>
+    <div class="rct-retro__band rct-retro__band--foot" data-slot="band" data-editable="false"></div>
+  </footer>
+</div>

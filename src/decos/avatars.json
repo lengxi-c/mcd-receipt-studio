@@ -1,0 +1,14 @@
+{
+  "_comment": "内置头像（8 款，几何色块 + 首字）。MCP 无头像接口，故全部为原创预设；不提供用户上传（D-022）。美术可整套替换为原创拟人形象。",
+  "version": 1,
+  "avatars": [
+    { "id": "geo-01", "name": "红方", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"14\" fill=\"#e6534a\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-02", "name": "黄圆", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"24\" r=\"24\" fill=\"#f2b52c\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-03", "name": "墨绿", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"24\" fill=\"#2f6b57\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-04", "name": "靛蓝", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"14\" fill=\"#3f5b8b\"/><rect x=\"14\" y=\"10\" width=\"20\" height=\"20\" rx=\"6\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-05", "name": "焦糖", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M24 0l24 24-24 24L0 24z\" fill=\"#a05a2c\"/><circle cx=\"24\" cy=\"20\" r=\"7\" fill=\"#fff\" opacity=\".92\"/><path d=\"M10 45c2-8 7-13 14-13s12 5 14 13z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-06", "name": "粉豆", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"18\" fill=\"#d97a9a\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-07", "name": "炭灰", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"12\" fill=\"#4a4a4a\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".92\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".92\"/></svg>" },
+    { "id": "geo-08", "name": "浅杏", "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"48\" height=\"48\" rx=\"24\" fill=\"#e8c9a0\"/><circle cx=\"24\" cy=\"19\" r=\"8\" fill=\"#fff\" opacity=\".95\"/><path d=\"M9 45c2-9 8-14 15-14s13 5 15 14z\" fill=\"#fff\" opacity=\".95\"/></svg>" }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "starter-stub-stats",
+  "name": "数据存根（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "承接当前启用的非点单类小票：积分存折 / 趣味统计。以摘要 + 统计 + 条目为主结构。当前为结构占位，最终美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 360,
+    "bleed": 0
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true,
+    "kinds": [
+      "points",
+      "fun"
+    ]
+  },
+  "tokens": {
+    "paper": "#ffffff",
+    "ink": "#2f2a24",
+    "accent": "#d7261e",
+    "rule": "#e6e0d6"
+  },
+  "defaultDeco": {
+    "band": "band-stripe",
+    "header-art": "hdr-arch",
+    "rule": "rule-cross",
+    "watermark": "wm-cross"
+  }
+}

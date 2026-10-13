@@ -1,0 +1,37 @@
+# ── 敏感信息：绝不入库 ──────────────────────────────
+.env
+.env.*
+*.token
+*token*.local.json
+mcp-config.local.json
+.mcp.local.json
+
+# ── 运行产物与临时文件 ─────────────────────────────
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+tmp/
+.tmp/
+dist/
+*.bak
+
+# ── 本地工作台状态（用户自己的小票数据） ───────────
+examples/output/*.local.html
+examples/local-*.json
+
+# ── 构建产物：用 `node cli.js build --all` 重新生成 ──
+# 根目录 index.html 是「零安装演示」的入口，刻意保留入库
+examples/output/
+
+# ── 开发期评审用的临时页面与截图（不是可交付产物） ──
+examples/header-layout-review.html
+examples/header-layout-review.png
+examples/receipt-layout-options.html
+examples/receipt-layout-options.png
+examples/build-header-layout-review.js
+
+# ── 已退役数据源的归档（仅本地留档，不入库） ─────────
+# 含活动 / 联名周边 / 战利品三类旧来源的模板与维护说明，
+# 不参与 CLI、工作台与正式构建；如需恢复见该目录内 README.md 的「Git 与恢复约定」。
+archive/

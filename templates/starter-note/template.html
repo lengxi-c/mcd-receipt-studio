@@ -1,0 +1,62 @@
+<!--
+  占位模板 · 碎碎念留言条（结构示例，美术设计待接入）
+  契约同 starter-classic，详见 docs/美术接入指南.md
+-->
+<div class="rct-note">
+
+  <div class="rct-note__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <div class="rct-note__band rct-note__band--head" data-slot="band" data-editable="false"></div>
+
+  <div class="rct-note__art" data-slot="header-art" data-editable="false"></div>
+
+  <div class="rct-note__rule" data-slot="rule" data-editable="false"></div>
+
+  <div class="rct-note__brand" data-field="meta.brand" data-editable="false">麦门日记</div>
+
+  <div class="rct-note__top">
+    <span class="rct-note__tag" data-field="order.datetime" data-format="date">—</span>
+    <span class="rct-note__store" data-field="store.name">麦当劳 · 示例门店</span>
+  </div>
+
+  <div class="rct-note__mood-row">
+    <div class="rct-note__mood-label" data-field="journal.moodLabel">今天的心情</div>
+  </div>
+
+  <p class="rct-note__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+
+  <div class="rct-note__divider" data-editable="false">· · ·</div>
+
+  <ul class="rct-note__items" data-repeat="items">
+    <li class="rct-note__item" data-repeat-item>
+      <span class="rct-note__dot" data-editable="false">•</span>
+      <span class="rct-note__item-name" data-field="name">品项</span>
+      <span class="rct-note__item-amt" data-field="amount" data-format="money">0.00</span>
+    </li>
+  </ul>
+
+  <div class="rct-note__foot">
+    <span class="rct-note__total" data-field="amounts.total" data-format="money">0.00</span>
+    <span class="rct-note__points" data-field="member.points" data-format="points"></span>
+  </div>
+
+  <!-- 签名区：会员编号取自 MCP accountId（真实数据），签名与日期供落款 -->
+  <div class="rct-note__sign">
+    <div class="rct-note__sign-row">
+      <span class="rct-note__sign-k" data-editable="false">会员编号</span>
+      <span class="rct-note__sign-v" data-field="member.no" data-editable="false">No. —</span>
+    </div>
+    <div class="rct-note__sign-row">
+      <span class="rct-note__sign-k" data-editable="false">签名</span>
+      <span class="rct-note__sign-v rct-note__sign-v--hand" data-field="journal.signature">—— 麦门日记</span>
+    </div>
+    <div class="rct-note__sign-row">
+      <span class="rct-note__sign-k" data-editable="false">日期</span>
+      <span class="rct-note__sign-v" data-field="order.datetime" data-format="date">—</span>
+    </div>
+  </div>
+
+  <div class="rct-note__rule rct-note__rule--foot" data-slot="rule" data-editable="false"></div>
+
+  <div class="rct-note__band rct-note__band--foot" data-slot="band" data-editable="false"></div>
+</div>

@@ -1,0 +1,129 @@
+/* ==========================================================================
+   占位模板 · 碎碎念留言条
+   作用域根：.rct-scope--starter-note
+   美术设计待接入：视觉可整体替换，结构（data-field 标注）保持不变。
+   ========================================================================== */
+
+.rct-scope--starter-note .rct-note {
+  width: 400px;
+  padding: 30px 32px 24px;
+  background: #fff;
+  color: #2f2a24;
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-shadow: 0 16px 40px rgba(47, 42, 36, .16);
+  border-radius: 6px;
+  position: relative;
+}
+/* 顶部一条装饰线（视觉待设计） */
+.rct-scope--starter-note .rct-note::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 32px;
+  right: 32px;
+  height: 2px;
+  background: #d7261e;
+  opacity: .85;
+}
+
+.rct-scope--starter-note .rct-note__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 11px;
+  color: #8b8378;
+  margin-bottom: 18px;
+}
+.rct-scope--starter-note .rct-note__tag {
+  font-family: ui-monospace, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  letter-spacing: 1px;
+}
+
+.rct-scope--starter-note .rct-note__mood-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.rct-scope--starter-note .rct-note__mood-label { font-size: 15px; font-weight: 600; }
+
+.rct-scope--starter-note .rct-note__note {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif;
+  font-size: 16px;
+  line-height: 1.9;
+  min-height: 76px;
+  color: #3a352f;
+}
+
+.rct-scope--starter-note .rct-note__divider {
+  text-align: center;
+  color: #cfc8bd;
+  letter-spacing: 6px;
+  margin: 18px 0 10px;
+  font-size: 12px;
+}
+
+.rct-scope--starter-note .rct-note__item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 12px;
+  color: #6f675c;
+}
+.rct-scope--starter-note .rct-note__dot { color: #d7261e; }
+.rct-scope--starter-note .rct-note__item-name { flex: 1 1 auto; }
+.rct-scope--starter-note .rct-note__item-amt { font-variant-numeric: tabular-nums; }
+
+.rct-scope--starter-note .rct-note__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #eee9e1;
+}
+.rct-scope--starter-note .rct-note__total { font-size: 22px; font-weight: 700; color: #d7261e; }
+.rct-scope--starter-note .rct-note__points { font-size: 11px; color: #8b8378; }
+
+/* ================= v0.4.1 票头 / 票尾分层（D-032 / D-034）=================
+   与专属模板同一套层次语言：水印 · 装饰条 · 头图 · 分割线 · 字标 · 签名区 */
+
+.rct-scope--starter-note .rct-note { isolation: isolate; }
+
+.rct-scope--starter-note .rct-note__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: #8b8378; opacity: .34;
+}
+.rct-scope--starter-note .rct-note__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-note .rct-note__band { height: 10px; color: #d7261e; opacity: .75; }
+.rct-scope--starter-note .rct-note__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-note .rct-note__band--head { margin: -30px -32px 12px; }
+.rct-scope--starter-note .rct-note__band--foot { margin: 0 -32px -24px; }
+
+.rct-scope--starter-note .rct-note__art { height: 40px; margin: 0 0 6px; color: #d7261e; opacity: .7; }
+.rct-scope--starter-note .rct-note__art svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-note .rct-note__rule { height: 8px; margin-top: 10px; color: #d7261e; opacity: .65; }
+.rct-scope--starter-note .rct-note__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-note .rct-note__rule--foot { margin: 0 0 10px; }
+
+.rct-scope--starter-note .rct-note__brand {
+  font-size: 12px; font-weight: 800; letter-spacing: 5px; text-indent: 5px;
+  text-align: center; margin-bottom: 4px;
+}
+
+.rct-scope--starter-note .rct-note__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed #ddd6c8; }
+.rct-scope--starter-note .rct-note__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--starter-note .rct-note__sign-k { color: #8b8378; font-size: 10px; letter-spacing: 1px; }
+.rct-scope--starter-note .rct-note__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--starter-note .rct-note__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+.rct-scope--starter-note .rct-note__foot { padding-top: 0; border-top: none; }
+
+.rct-scope--starter-note .rct-note::before { content: none; }  /* 旧顶部装饰线，已由 band 槽取代 */

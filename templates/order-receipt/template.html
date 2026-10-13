@@ -1,0 +1,125 @@
+<!--
+  专属模板 · 历史点单小票（明细版）  —— 对应「① 历史点单」
+  ------------------------------------------------------------------
+  契约：data-field 取数 / data-repeat 循环 / data-block 栏位 / data-slot 装饰槽
+  ⚠️ 美术占位：结构已按「可开关栏位」切好；替换视觉时请保留 data-block / data-slot 与类名。
+     所有 data-block 元素必须同级（引擎靠同级重排实现栏位排序）。
+
+  票头：固定装饰区 → 可选取餐信息 → 可选餐厅信息 → 订单信息
+   票尾：sign 签名区（含印章）→ rule 分割线 → band 尾图收边
+   全局：watermark 水印铺满整票（引擎置于内容之下）
+  （v0.4.1 已移除胶带装饰与页脚免责 / slogan 横条）
+-->
+<div class="rcpt rcpt--order">
+
+  <div class="rcpt__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <header class="rcpt__head" data-editable="false">
+    <div class="rcpt__band rcpt__band--head" data-slot="band" data-editable="false"></div>
+    <div class="rcpt__art" data-slot="header-art" data-editable="false"></div>
+    <div class="rcpt__perforation" data-editable="false" aria-hidden="true"></div>
+    <div class="rcpt__rule" data-slot="rule" data-editable="false"></div>
+  </header>
+
+  <section class="rcpt__pickup" data-block="pickup-info" data-block-name="取餐信息" data-block-optional="true" data-block-require="order.pickupCode">
+    <div class="rcpt__pickup-row" data-editable="false">
+      <div class="rcpt__badge" data-field="order.pickupCode" data-editable="false">--</div>
+      <div class="rcpt__pickup-aside" data-editable="false">
+        <span>MCD / MOMENTS</span>
+        <span>ISSUE <span class="rcpt__issue-date" data-field="order.datetime" data-format="monthday" data-editable="false">--</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="rcpt__restaurant" data-block="restaurant-info" data-block-name="餐厅信息" data-block-optional="true" data-block-require="store.name,store.address">
+    <div class="rcpt__store" data-field="store.name">麦当劳 · 示例门店</div>
+    <div class="rcpt__addr" data-field="store.address"></div>
+  </section>
+
+  <section class="rcpt__meta" data-block="meta" data-block-name="订单信息">
+    <div class="rcpt__meta-title" data-editable="false"><span>ORDER DETAILS</span><span class="rcpt__meta-title-line"></span></div>
+    <dl class="rcpt__meta-list">
+      <div class="rcpt__meta-row"><dt><span class="rcpt__meta-en">ORDER NO.</span><span class="rcpt__meta-zh">单号</span></dt><dd data-field="meta.receiptNo">—</dd></div>
+      <div class="rcpt__meta-row"><dt><span class="rcpt__meta-en">DATE &amp; TIME</span><span class="rcpt__meta-zh">时间</span></dt><dd data-field="order.datetime" data-format="datetime">—</dd></div>
+      <div class="rcpt__meta-row"><dt><span class="rcpt__meta-en">SERVICE</span><span class="rcpt__meta-zh">方式</span></dt><dd data-field="order.takeWay">—</dd></div>
+    </dl>
+  </section>
+
+  <section class="rcpt__lines" data-block="lines" data-block-name="出品单">
+    <div class="rcpt__lines-title" data-editable="false"><span>ITEMS ORDERED</span><span class="rcpt__lines-title-rule"></span></div>
+    <ul class="rcpt__list" data-repeat="items">
+      <li class="rcpt__line" data-repeat-item>
+        <div class="rcpt__line-top">
+          <span class="rcpt__line-name" data-field="name">品项</span>
+          <span class="rcpt__line-qty" data-field="qty" data-format="qty">1</span>
+          <span class="rcpt__line-amt" data-field="amount" data-format="money">0.00</span>
+        </div>
+        <div class="rcpt__line-spec" data-if="spec">
+          <span class="rcpt__line-spec-mark" data-editable="false">↳</span>
+          <span class="rcpt__line-spec-copy" data-field="spec"></span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="rcpt__fees" data-block="fees" data-block-name="费用拆分" data-block-optional="true">
+    <div class="rcpt__row"><span>商品金额</span><span data-field="fees.productPrice" data-format="money">0.00</span></div>
+    <div class="rcpt__row" data-if="fees.packing"><span>打包费</span><span data-field="fees.packing" data-format="money">0.00</span></div>
+    <div class="rcpt__row" data-if="fees.delivery"><span>配送费</span><span data-field="fees.delivery" data-format="money">0.00</span></div>
+  </section>
+
+  <section class="rcpt__amount" data-block="amount" data-block-name="金额合计">
+    <div class="rcpt__row"><span>商品小计</span><span data-field="amounts.subtotal" data-format="money">0.00</span></div>
+    <div class="rcpt__row" data-if="amounts.listPrice"><span>原价合计</span><span data-field="amounts.listPrice" data-format="money">0.00</span></div>
+    <div class="rcpt__row rcpt__row--disc" data-if="amounts.discount"><span>优惠合计</span><span>&minus;<span data-field="amounts.discount" data-format="money">0.00</span></span></div>
+    <div class="rcpt__row rcpt__row--total"><span>实付</span><span data-field="amounts.total" data-format="money">0.00</span></div>
+  </section>
+
+  <section class="rcpt__disc" data-block="disc" data-block-name="优惠明细" data-block-optional="true" data-block-require="coupons">
+    <ul data-repeat="coupons">
+      <li class="rcpt__row" data-repeat-item>
+        <span data-field="name">优惠</span><span data-field="amount" data-format="money">0.00</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="rcpt__remark" data-block="remark" data-block-name="我的备注" data-block-optional="true" data-if="order.remark" data-block-require="order.remark">
+    <div class="rcpt__remark-label" data-editable="false">我写的备注</div>
+    <p class="rcpt__remark-text" data-field="order.remark" data-kind="note"></p>
+  </section>
+
+  <section class="rcpt__journal" data-block="journal" data-block-name="手账区" data-block-optional="true">
+    <div class="rcpt__journal-main">
+      <div class="rcpt__journal-heading" data-editable="false">
+        <span class="rcpt__journal-heading-text">NOTES TO SELF</span>
+        <span class="rcpt__journal-heading-rule"></span>
+        <span class="rcpt__journal-heading-mark">✳</span>
+      </div>
+      <span class="rcpt__mood-label" data-field="journal.moodLabel" hidden></span>
+      <p class="rcpt__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+    </div>
+  </section>
+
+  <!-- 签名区：会员编号是真实数据（会员账户 ID），签名与日期供用户落款 -->
+  <section class="rcpt__sign" data-block="sign" data-block-name="签名区" data-block-optional="true">
+    <div class="rcpt__stamp" data-slot="stamp"></div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">会员编号</span>
+      <span class="rcpt__sign-v" data-field="member.no" data-editable="false">No. —</span>
+    </div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">签名</span>
+      <span class="rcpt__sign-v rcpt__sign-v--hand" data-field="journal.signature">——</span>
+    </div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">日期</span>
+      <span class="rcpt__sign-v" data-field="order.datetime" data-format="date">—</span>
+    </div>
+  </section>
+
+  <footer class="rcpt__foot">
+    <div class="rcpt__rule rcpt__rule--foot" data-slot="rule" data-editable="false"></div>
+    <div class="rcpt__band rcpt__band--foot" data-slot="band" data-editable="false"></div>
+  </footer>
+
+</div>

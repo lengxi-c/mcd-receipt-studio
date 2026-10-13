@@ -1,0 +1,125 @@
+/*!
+ * 麦门小票铺 · 引擎样式（工具条 / 舞台 / 编辑态 / 打印）
+ * 说明：这里只放「引擎级」样式，不含任何具体模板的视觉。
+ *       模板视觉一律写在 templates/<id>/template.css 内，并以
+ *       .rct-scope--<id> 作为作用域根，严禁污染全局。
+ */
+
+:root {
+  --rct-bg: #f4f1ec;
+  --rct-surface: #ffffff;
+  --rct-line: #e2ddd4;
+  --rct-ink: #2f2a24;
+  --rct-ink-weak: #8b8378;
+  --rct-accent: #d7261e;
+  --rct-accent-ink: #ffffff;
+  --rct-radius: 12px;
+}
+
+.rct-app {
+  --rct-shadow: 0 18px 40px rgba(47, 42, 36, .14);
+  box-sizing: border-box;
+  padding: 0 16px 40px;
+}
+
+.rct-app *,
+.rct-app *::before,
+.rct-app *::after { box-sizing: border-box; }
+
+/* ------------------------------ 工具条 ------------------------------ */
+
+.rct-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  max-width: 900px;
+  margin: 0 auto 18px;
+  padding: 12px 14px;
+  background: var(--rct-surface);
+  border: 1px solid var(--rct-line);
+  border-radius: var(--rct-radius);
+  box-shadow: 0 2px 10px rgba(47, 42, 36, .06);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  color: var(--rct-ink);
+}
+
+.rct-toolbar__group { display: flex; align-items: center; gap: 8px; }
+.rct-toolbar__group--grow { flex: 1 1 auto; flex-wrap: wrap; }
+.rct-toolbar__label { color: var(--rct-ink-weak); }
+.rct-toolbar__hint { flex: 1 1 100%; color: var(--rct-ink-weak); font-size: 12px; }
+
+.rct-toolbar__select {
+  padding: 6px 10px;
+  border: 1px solid var(--rct-line);
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.rct-btn {
+  padding: 7px 14px;
+  border: 1px solid var(--rct-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--rct-ink);
+  font: inherit;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.rct-btn:hover { background: #faf8f5; box-shadow: 0 2px 8px rgba(47, 42, 36, .1); }
+.rct-btn:active { transform: translateY(1px); }
+.rct-btn--primary { background: var(--rct-accent); border-color: var(--rct-accent); color: var(--rct-accent-ink); }
+.rct-btn--primary:hover { background: #c01f18; }
+.rct-btn--ghost { color: var(--rct-ink-weak); }
+
+/* ------------------------------ 舞台 ------------------------------ */
+
+.rct-stage {
+  display: flex;
+  justify-content: center;
+  padding: 28px 12px 40px;
+  background: #d7dcdf;
+  box-shadow: inset 0 0 0 1px rgba(67, 76, 83, .08);
+  border-radius: 16px;
+  overflow: auto;
+}
+
+.rct-scope { position: relative; }
+
+/* 通用小票排版兜底（模板可覆盖） */
+.rct-scope ul { list-style: none; margin: 0; padding: 0; }
+.rct-scope p { margin: 0; }
+.rct-scope dl { margin: 0; }
+
+/* 可编辑提示：hover 虚线、focus 高亮，帮助用户发现「哪里能改」 */
+.rct-scope [contenteditable="true"] {
+  outline: none;
+  border-radius: 3px;
+  transition: box-shadow .12s ease, background .12s ease;
+}
+.rct-scope [contenteditable="true"]:hover {
+  box-shadow: 0 0 0 1px rgba(215, 38, 30, .25);
+  background: rgba(215, 38, 30, .04);
+}
+.rct-scope [contenteditable="true"]:focus {
+  box-shadow: 0 0 0 2px rgba(215, 38, 30, .45);
+  background: rgba(215, 38, 30, .06);
+}
+
+/* ------------------------------ 打印 ------------------------------ */
+
+@media print {
+  .rct-toolbar { display: none !important; }
+  .rct-stage {
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+  body { background: #fff !important; }
+  @page { margin: 8mm; }
+}

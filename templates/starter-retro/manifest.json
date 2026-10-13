@@ -1,0 +1,35 @@
+{
+  "id": "starter-retro",
+  "name": "复古点单存根（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "牛皮纸色 + 双线边框 + 印章元素的旧票据风存根。当前为结构占位模板，最终美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 360,
+    "bleed": 0
+  },
+  "export": {
+    "scale": 3,
+    "background": "#f3e7d3"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true
+  },
+  "tokens": {
+    "paper": "#f3e7d3",
+    "ink": "#4a3b28",
+    "stamp": "#b4553f"
+  },
+  "defaultDeco": {
+    "band": "band-dash",
+    "header-art": "hdr-tear",
+    "rule": "rule-dotted",
+    "watermark": "wm-stripe"
+  }
+}

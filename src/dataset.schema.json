@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/<user>/mcd-receipt-studio/src/dataset.schema.json",
+  "title": "麦门小票 · 数据集契约 dataset.json",
+  "description": "Agent 把麦当劳 MCP 拉到的一切原始数据打包成这个结构，交给前端。前端据此渲染「数据面板」，由用户挑选要生成小票的数据。这是数据处理层与展示层之间的契约。",
+  "version": "0.1.0",
+  "type": "object",
+  "required": ["version", "generatedAt", "source", "sections"],
+  "properties": {
+    "version": { "type": "integer", "description": "数据集契约版本，当前为 1" },
+    "generatedAt": { "type": "string", "description": "数据集生成时间（来自 now-time-info）" },
+    "source": { "type": "string", "enum": ["mcp", "demo"], "description": "mcp=真实接口拉取 / demo=示例数据" },
+    "account": {
+      "type": "object",
+      "description": "会员账户概览（来自 query-my-account）",
+      "properties": {
+        "availablePoint": { "type": "number", "description": "可用积分" },
+        "accumulativePoint": { "type": "number", "description": "累计积分" },
+        "usedPoint": { "type": "number", "description": "已使用积分" },
+        "expiredPoint": { "type": "number", "description": "已过期积分" },
+        "currentMonthExpirePoint": { "type": "number", "description": "本月将过期积分" },
+        "currency": { "type": "string", "description": "积分货币名，如「麦享会积分」" }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "description": "数据分区。当前工作台只使用 orders、account 与统计所需的菜单字段。activities / collectibles / prizes / coupons 是已退役来源的可选历史字段，保留兼容旧数据集，不再要求 MCP 拉取。",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "description": "点餐历史（order-list）→「历史点单小票」数据源",
+          "items": {
+            "type": "object",
+            "required": ["id", "datetime", "storeName", "total"],
+            "properties": {
+              "id": { "type": "string", "description": "订单标识（已脱敏，建议 F- 前缀）" },
+              "datetime": { "type": "string", "description": "下单时间 yyyy-MM-dd HH:mm:ss" },
+              "meal": { "type": "string", "description": "餐次：早餐/午餐/下午茶/夜市/其他（由时间推算）" },
+              "orderType": { "type": "string", "description": "到店自取 / 麦乐送" },
+              "takeWay": { "type": "string", "description": "堂食 / 外带" },
+              "storeName": { "type": "string" },
+              "storeCode": { "type": "string" },
+              "status": { "type": "string", "description": "订单状态文案，如「已完成」「已取消」" },
+              "total": { "type": "number", "description": "实付金额" },
+              "items": {
+                "type": "array",
+                "description": "品项。注意：order-list 不提供单项单价，只有整单金额。小票应展示「品项 + 数量」，金额只展整单合计，不要臆造单价。",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "qty": { "type": "number" },
+                    "combo": {
+                      "type": "array",
+                      "description": "套餐子项",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "qty": { "type": "number" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "activities": {
+          "type": "array",
+          "description": "【已退役，可选兼容字段】活动日历数据；不再进入工作台或正式构建。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "date": { "type": "string", "description": "活动日期 yyyy-MM-dd" },
+              "kind": { "type": "string", "description": "活动类型：联名/新品/早餐/派对/优惠/其他" },
+              "brand": { "type": "string", "description": "联名品牌（若有）" },
+              "desc": { "type": "string", "description": "活动简介（清理后的纯文本）" }
+            }
+          }
+        },
+        "collectibles": {
+          "type": "array",
+          "description": "【已退役，可选兼容字段】联名 / 周边历史数据；不再进入工作台或正式构建。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string", "description": "联名周边 / 玩具 / 礼盒 / 实物" },
+              "price": { "type": "number", "description": "加购价或售价（可为 0）" },
+              "point": { "type": "number", "description": "所需积分（积分兑换类）" },
+              "releaseDate": { "type": "string" },
+              "series": { "type": "string", "description": "所属系列 / 联名方" },
+              "owned": { "type": "boolean", "description": "用户是否已收集（默认 false，由用户在页面勾选，或从订单中推断）" }
+            }
+          }
+        },
+        "prizes": {
+          "type": "array",
+          "description": "【已退役，可选兼容字段】抽奖奖品历史数据；不再进入工作台或正式构建。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "typeText": { "type": "string", "description": "奖品类型文案，如「门票」「优惠券」「积分奖」" },
+              "recordTime": { "type": "string", "description": "中奖时间" },
+              "statusText": { "type": "string", "description": "状态文案，如「可用」「已使用」" }
+            }
+          }
+        },
+        "coupons": {
+          "type": "array",
+          "description": "【已退役，可选兼容字段】优惠券列表历史数据；订单中的真实优惠明细仍由 query-order 提供。",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "status": { "type": "string", "description": "可领取 / 已持有" },
+              "kind": { "type": "string", "description": "available=可领取 / owned=已持有" }
+            }
+          }
+        },
+        "frequent": {
+          "type": "array",
+          "description": "常点餐品（query-meals 的 frequent 字段）→ 趣味数据与快捷选品",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "code": { "type": "string" }
+            }
+          }
+        },
+        "menuHighlights": {
+          "type": "array",
+          "description": "菜单亮点（query-meals 中带「上新」「爆款」「限定」等标签的餐品）→ 新品尝鲜记录",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "price": { "type": "number" },
+              "originalPrice": { "type": "number" },
+              "tags": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "order-receipt",
+  "name": "历史点单小票 · 明细版（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "对应「① 历史点单」。明细版出品单：品项、数量、行金额与按需显示的套餐详情；无明细时仅展示整单金额。包含优惠明细、取餐码、手账与签名区。票头/票尾分层（装饰条 · 头图 · 分割线 · 水印 · 印章）。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 320,
+    "bleed": 6
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true,
+    "blocks": true,
+    "slots": true,
+    "detail": true
+  },
+  "defaultDeco": {
+    "band": "band-stripe",
+    "header-art": "hdr-png-mcdonalds-wordmark",
+    "rule": "rule-diamond",
+    "watermark": "wm-side-doodles"
+  },
+  "tokens": {
+    "ink": "#2b2b2b",
+    "paper": "#fdfdfa",
+    "line": "#c9c9c4"
+  }
+}

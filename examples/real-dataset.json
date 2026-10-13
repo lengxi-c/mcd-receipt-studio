@@ -1,0 +1,401 @@
+{
+  "_comment": "★ 真实数据集 —— 由 mcd-mcp 于 2026-10-12 20:46 (GMT+8) 实际拉取并整理。这是 D6 端到端演练的输入。订单号已脱敏为 F-+后6位；收件人姓名/手机号/详细住址等个人数据已剔除。原始响应见 .devtest/raw/2026-10-12-mcp-raw.json。",
+  "version": 2,
+  "generatedAt": "2026-10-12 20:46",
+  "source": "mcp",
+  "account": {
+    "availablePoint": 114,
+    "accountId": "04F0484B-3A4F-000A-0007-FF1EAEC75CF0",
+    "accumulativePoint": 1563.2,
+    "usedPoint": 380,
+    "expiredPoint": 1069.2,
+    "currentMonthExpirePoint": 62.7,
+    "currency": "麦享会积分",
+    "level": ""
+  },
+  "sections": {
+    "orders": [
+      {
+        "id": "F-2383757",
+        "datetime": "2026-10-10 21:14:59",
+        "meal": "夜市",
+        "orderType": "到店自取",
+        "takeWay": "外带",
+        "storeName": "麦当劳示例科技园餐厅",
+        "storeCode": "9000001",
+        "status": "已取消",
+        "total": 13.9,
+        "items": [
+          {
+            "name": "精选超值随心配",
+            "qty": 1,
+            "combo": [
+              {
+                "name": "麦乐鸡5块",
+                "qty": 1
+              },
+              {
+                "name": "锡兰红茶",
+                "qty": 1
+              }
+            ],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900015568_320.png"
+          }
+        ],
+        "detail": {
+          "pickupCode": "",
+          "takeWay": "外带",
+          "remark": "",
+          "storeAddress": "示例园区 3 号楼 1 层",
+          "createTime": "2026-10-10 21:14:59",
+          "listPrice": 13.9,
+          "discount": 0,
+          "delivery": 0,
+          "total": 13.9,
+          "fees": {
+            "productPrice": 13.9,
+            "packing": 0,
+            "delivery": 0,
+            "tableware": 0
+          },
+          "coupons": [],
+          "lines": [
+            {
+              "name": "精选超值随心配",
+              "qty": 1,
+              "unitPrice": 13.9,
+              "amount": 13.9,
+              "combo": [
+                {
+                  "name": "麦乐鸡5块",
+                  "qty": 1
+                },
+                {
+                  "name": "锡兰红茶",
+                  "qty": 1
+                }
+              ],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900015568_320.png"
+            }
+          ]
+        }
+      },
+      {
+        "id": "F-0251956",
+        "datetime": "2026-06-01 11:48:32",
+        "meal": "午餐",
+        "orderType": "到店自取",
+        "takeWay": "外带",
+        "storeName": "麦当劳示例市中心餐厅",
+        "storeCode": "9000002",
+        "status": "已完成",
+        "total": 14.9,
+        "items": [
+          {
+            "name": "精选超值随心配",
+            "qty": 1,
+            "combo": [
+              {
+                "name": "双层吉士汉堡",
+                "qty": 1
+              },
+              {
+                "name": "怡泉+C麦炫酷",
+                "qty": 1
+              }
+            ],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260325/product/MS_9900013291_320.png"
+          }
+        ],
+        "detail": {
+          "pickupCode": "35189",
+          "takeWay": "外带",
+          "remark": "",
+          "storeAddress": "示例路 88 号 1 层 101 室",
+          "createTime": "2026-06-01 11:48:32",
+          "listPrice": 14.9,
+          "discount": 0,
+          "delivery": 0,
+          "total": 14.9,
+          "fees": {
+            "productPrice": 14.9,
+            "packing": 0,
+            "delivery": 0,
+            "tableware": 0
+          },
+          "coupons": [],
+          "lines": [
+            {
+              "name": "精选超值随心配",
+              "qty": 1,
+              "unitPrice": 14.9,
+              "amount": 14.9,
+              "combo": [
+                {
+                  "name": "双层吉士汉堡",
+                  "qty": 1
+                },
+                {
+                  "name": "怡泉+C麦炫酷",
+                  "qty": 1
+                }
+              ],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260325/product/MS_9900013291_320.png"
+            }
+          ]
+        }
+      },
+      {
+        "id": "F-582956",
+        "datetime": "2025-11-23 20:57:13",
+        "meal": "夜市",
+        "orderType": "到店自取",
+        "takeWay": "外带",
+        "storeName": "麦当劳示例火车站餐厅",
+        "storeCode": "9000003",
+        "status": "已完成",
+        "total": 36.4,
+        "items": [
+          {
+            "name": "脆薯饼",
+            "qty": 1,
+            "combo": [],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_521286_320.png"
+          },
+          {
+            "name": "牛蘑王芝士蘑菇双牛堡四件套",
+            "qty": 1,
+            "combo": [
+              {
+                "name": "牛蘑王芝士蘑菇双牛堡",
+                "qty": 1
+              },
+              {
+                "name": "小杯玉米杯",
+                "qty": 1
+              },
+              {
+                "name": "麦乐鸡4块",
+                "qty": 1
+              },
+              {
+                "name": "无糖可口可乐大杯",
+                "qty": 1
+              }
+            ],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011517_320.png"
+          }
+        ],
+        "detail": {
+          "pickupCode": "35391",
+          "takeWay": "外带",
+          "remark": "",
+          "storeAddress": "示例街 5 号站前广场 1 层",
+          "createTime": "2025-11-23 20:57:13",
+          "listPrice": 76,
+          "discount": 39.6,
+          "delivery": 0,
+          "total": 36.4,
+          "fees": {
+            "productPrice": 76,
+            "packing": 0,
+            "delivery": 0,
+            "tableware": 0
+          },
+          "coupons": [
+            {
+              "name": "超值4件套",
+              "amount": 39.6
+            }
+          ],
+          "lines": [
+            {
+              "name": "脆薯饼",
+              "qty": 1,
+              "unitPrice": 8.5,
+              "amount": 8.5,
+              "combo": [],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_521286_320.png"
+            },
+            {
+              "name": "牛蘑王芝士蘑菇双牛堡四件套",
+              "qty": 1,
+              "unitPrice": 67.5,
+              "amount": 67.5,
+              "combo": [
+                {
+                  "name": "牛蘑王芝士蘑菇双牛堡",
+                  "qty": 1
+                },
+                {
+                  "name": "小杯玉米杯",
+                  "qty": 1
+                },
+                {
+                  "name": "麦乐鸡4块",
+                  "qty": 1
+                },
+                {
+                  "name": "无糖可口可乐大杯",
+                  "qty": 1
+                }
+              ],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011517_320.png"
+            }
+          ]
+        }
+      },
+      {
+        "id": "F-084491",
+        "datetime": "2025-10-28 18:56:06",
+        "meal": "晚餐",
+        "orderType": "麦乐送",
+        "takeWay": "配送",
+        "storeName": "麦当劳示例大学城餐厅",
+        "storeCode": "9000004",
+        "status": "已完成",
+        "total": 62.79,
+        "items": [
+          {
+            "name": "培根安格斯厚牛堡四件套",
+            "qty": 1,
+            "combo": [
+              {
+                "name": "培根安格斯厚牛堡",
+                "qty": 1
+              },
+              {
+                "name": "麦乐鸡5块",
+                "qty": 1
+              },
+              {
+                "name": "大薯条",
+                "qty": 1
+              },
+              {
+                "name": "无糖可口可乐大杯",
+                "qty": 1
+              }
+            ],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011315_320.png"
+          },
+          {
+            "name": "麦金卡月卡（30天）",
+            "qty": 1,
+            "combo": [],
+            "image": "https://menu-img.mcd.cn/pcm/prod/menu/20250423/product/MS_513817_320_1744684441670.png"
+          }
+        ],
+        "detail": {
+          "pickupCode": "",
+          "takeWay": "配送",
+          "remark": "麦乐鸡侠开奔驰car me!!!赞美麦乐鸡侠！！！！",
+          "storeAddress": "示例大道 12 号 B1-05",
+          "createTime": "2025-10-28 18:56:06",
+          "listPrice": 75.8,
+          "discount": 13.01,
+          "delivery": 6,
+          "total": 62.79,
+          "fees": {
+            "productPrice": 67.9,
+            "packing": 1.9,
+            "delivery": 6,
+            "tableware": 0
+          },
+          "coupons": [
+            {
+              "name": "麦金卡免打包服务费",
+              "amount": 1.9
+            },
+            {
+              "name": "5元麦乐送福利金",
+              "amount": 5
+            }
+          ],
+          "lines": [
+            {
+              "name": "培根安格斯厚牛堡四件套",
+              "qty": 1,
+              "unitPrice": 48.9,
+              "amount": 48.9,
+              "combo": [
+                {
+                  "name": "培根安格斯厚牛堡",
+                  "qty": 1
+                },
+                {
+                  "name": "麦乐鸡5块",
+                  "qty": 1
+                },
+                {
+                  "name": "大薯条",
+                  "qty": 1
+                },
+                {
+                  "name": "无糖可口可乐大杯",
+                  "qty": 1
+                }
+              ],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011315_320.png"
+            },
+            {
+              "name": "麦金卡月卡（30天）",
+              "qty": 1,
+              "unitPrice": 19,
+              "amount": 19,
+              "combo": [],
+              "image": "https://menu-img.mcd.cn/pcm/prod/menu/20250423/product/MS_513817_320_1744684441670.png"
+            }
+          ]
+        }
+      }
+    ],
+    "frequent": [],
+    "menuHighlights": [
+      {
+        "name": "龙焰鸡腿堡三件套",
+        "price": 26.9,
+        "tags": [
+          "上新",
+          "韩式风味"
+        ]
+      },
+      {
+        "name": "龙焰芝士棒鸡腿堡三件套",
+        "price": 29.9,
+        "tags": [
+          "上新"
+        ]
+      },
+      {
+        "name": "鸡薯双全盒",
+        "price": 15.9,
+        "tags": [
+          "蘸酱"
+        ]
+      },
+      {
+        "name": "蘸酱炸鸡",
+        "price": 11.9,
+        "tags": [
+          "蘸酱"
+        ]
+      },
+      {
+        "name": "厚松饼堡三件套",
+        "price": 15,
+        "tags": [
+          "早餐"
+        ]
+      },
+      {
+        "name": "9.9 元早餐两件套",
+        "price": 9.9,
+        "tags": [
+          "早餐",
+          "限时"
+        ]
+      }
+    ]
+  }
+}

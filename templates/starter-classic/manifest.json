@@ -1,0 +1,35 @@
+{
+  "id": "starter-classic",
+  "name": "经典收银小票（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "等宽字体 + 虚线裁切线的仿真收银小票。当前为结构占位模板，最终美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 320,
+    "bleed": 6
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true
+  },
+  "tokens": {
+    "ink": "#2b2b2b",
+    "paper": "#fdfdfa",
+    "line": "#c9c9c4"
+  },
+  "defaultDeco": {
+    "band": "band-dots",
+    "header-art": "hdr-grid",
+    "rule": "rule-dashed",
+    "watermark": "wm-grid"
+  }
+}

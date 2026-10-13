@@ -1,0 +1,152 @@
+/* ==========================================================================
+   占位模板 · 复古点单存根
+   作用域根：.rct-scope--starter-retro
+   美术设计待接入：视觉可整体替换，结构（data-field 标注）保持不变。
+   ========================================================================== */
+
+.rct-scope--starter-retro .rct-retro {
+  width: 360px;
+  background: #f3e7d3;
+  color: #4a3b28;
+  font-family: Georgia, "Songti SC", "SimSun", serif;
+  box-shadow: 0 12px 32px rgba(74, 59, 40, .22);
+  border: 1px solid #d9c8a8;
+  padding: 8px;
+  position: relative;
+}
+
+.rct-scope--starter-retro .rct-retro__head {
+  border: 1px solid #c9b48f;
+  border-bottom: none;
+  padding: 16px 16px 12px;
+  text-align: center;
+  position: relative;
+}
+.rct-scope--starter-retro .rct-retro__label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #a08a63;
+  margin-bottom: 8px;
+}
+.rct-scope--starter-retro .rct-retro__store {
+  font-size: 17px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.rct-scope--starter-retro .rct-retro__addr {
+  font-size: 11px;
+  color: #8b7654;
+  margin-top: 2px;
+}
+
+.rct-scope--starter-retro .rct-retro__body {
+  border: 1px solid #c9b48f;
+  border-top: none;
+  padding: 12px 16px 16px;
+}
+
+.rct-scope--starter-retro .rct-retro__dates {
+  display: flex;
+  gap: 14px;
+  border-bottom: 1px dashed #c9b48f;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.rct-scope--starter-retro .rct-retro__date { display: flex; gap: 6px; align-items: baseline; }
+.rct-scope--starter-retro .rct-retro__k,
+.rct-scope--starter-retro .rct-retro__label {
+  font-family: ui-monospace, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #a08a63;
+}
+.rct-scope--starter-retro .rct-retro__v { font-size: 12px; }
+
+.rct-scope--starter-retro .rct-retro__item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px dotted #d9c8a8;
+}
+.rct-scope--starter-retro .rct-retro__item-name { flex: 1 1 auto; font-size: 13px; }
+.rct-scope--starter-retro .rct-retro__item-spec { font-size: 11px; color: #8b7654; }
+.rct-scope--starter-retro .rct-retro__item-amt { font-size: 13px; font-variant-numeric: tabular-nums; }
+
+.rct-scope--starter-retro .rct-retro__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 2px solid #c9b48f;
+}
+.rct-scope--starter-retro .rct-retro__total-num { font-size: 20px; font-weight: 700; }
+
+.rct-scope--starter-retro .rct-retro__journal {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed #c9b48f;
+}
+.rct-scope--starter-retro .rct-retro__mood-label { font-size: 11px; color: #8b7654; }
+.rct-scope--starter-retro .rct-retro__note {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif;
+  font-size: 13px;
+  line-height: 1.7;
+  min-height: 34px;
+}
+
+.rct-scope--starter-retro .rct-retro__stamp {
+  display: inline-block;
+  margin: 0 0 8px;
+  border: 1px solid #b4553f;
+  color: #b4553f;
+  font-family: ui-monospace, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  transform: rotate(-3deg);
+  border-radius: 2px;
+}
+
+/* ================= v0.4.1 票头 / 票尾分层（D-032 / D-034）=================
+   与专属模板同一套层次语言：水印 · 装饰条 · 头图 · 分割线 · 字标 · 签名区 */
+
+.rct-scope--starter-retro .rct-retro { isolation: isolate; }
+
+.rct-scope--starter-retro .rct-retro__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: #8b8378; opacity: .34;
+}
+.rct-scope--starter-retro .rct-retro__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-retro .rct-retro__band { height: 10px; color: #d7261e; opacity: .75; }
+.rct-scope--starter-retro .rct-retro__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-retro .rct-retro__band--head { margin: -0px -0px 12px; }
+.rct-scope--starter-retro .rct-retro__band--foot { margin: 0 -0px -0px; }
+
+.rct-scope--starter-retro .rct-retro__art { height: 40px; margin: 0 0 6px; color: #d7261e; opacity: .7; }
+.rct-scope--starter-retro .rct-retro__art svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-retro .rct-retro__rule { height: 8px; margin-top: 10px; color: #d7261e; opacity: .65; }
+.rct-scope--starter-retro .rct-retro__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-retro .rct-retro__rule--foot { margin: 0 0 10px; }
+
+.rct-scope--starter-retro .rct-retro__brand {
+  font-size: 12px; font-weight: 800; letter-spacing: 5px; text-indent: 5px;
+  text-align: center; margin-bottom: 4px;
+}
+
+.rct-scope--starter-retro .rct-retro__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed #ddd6c8; }
+.rct-scope--starter-retro .rct-retro__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--starter-retro .rct-retro__sign-k { color: #8b8378; font-size: 10px; letter-spacing: 1px; }
+.rct-scope--starter-retro .rct-retro__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--starter-retro .rct-retro__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+.rct-scope--starter-retro .rct-retro__foot { margin-top: 12px; text-align: center; }

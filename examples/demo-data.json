@@ -1,0 +1,87 @@
+{
+  "_comment": "示例小票数据（全部为脱敏虚构内容，用于演示与自检）。真实数据由 agent 调用麦当劳 MCP 生成后经 mappers 产出。v0.3.0：补齐明细版字段（badge / fees / listPrice / remark / signature / blocks / skin / deco / avatar）。",
+  "meta": {
+    "receiptNo": "F-NO.0001",
+    "generatedAt": "2026-10-12T13:30:00+08:00",
+    "source": "demo",
+    "kind": "order",
+    "brand": "麦门日记",
+    "title": "历史点单小票",
+    "badge": "取餐码 35391",
+    "templateId": "order-receipt"
+  },
+  "store": {
+    "name": "麦当劳 · 示例门店",
+    "code": "0000000",
+    "address": "示例区 · 示例路 1 号",
+    "phone": "顾客中心 400-920-0205"
+  },
+  "order": {
+    "datetime": "2026-10-12T13:12:00+08:00",
+    "orderType": "到店自取",
+    "takeWay": "外带",
+    "orderNo": "示例 0001",
+    "pickupCode": "35391",
+    "remark": "多加一包番茄酱，谢谢。",
+    "address": ""
+  },
+  "items": [
+    {
+      "name": "精选超值随心配",
+      "spec": "双层吉士汉堡 + 无糖可口可乐中杯",
+      "qty": 1,
+      "unitPrice": 13.9,
+      "amount": 13.9,
+      "code": "9900",
+      "tag": "随心配",
+      "image": null
+    },
+    {
+      "name": "香芋派",
+      "spec": "1 个",
+      "qty": 1,
+      "unitPrice": 4,
+      "amount": 4,
+      "code": "4106",
+      "image": null
+    }
+  ],
+  "fees": {
+    "productPrice": 17.9,
+    "packing": 0,
+    "delivery": 0,
+    "tableware": 0
+  },
+  "amounts": {
+    "subtotal": 17.9,
+    "discount": 4,
+    "delivery": 0,
+    "total": 13.9,
+    "currency": "CNY",
+    "mode": "detail",
+    "listPrice": 17.9
+  },
+  "coupons": [
+    {
+      "name": "香芋派优惠（示例）",
+      "amount": 4
+    }
+  ],
+  "member": {
+    "points": 114,
+    "level": "麦麦会员",
+    "no": "No.64F0-2A19"
+  },
+  "journal": {
+    "moodLabel": "交完论文的下午",
+    "note": "终于把论文交了，奖励自己一顿。\n坐在窗边吃完，觉得世界又温柔了一点。",
+    "signature": "—— 麦门日记 · 示例",
+    "rating": 5,
+    "weather": "晴",
+    "with": "一个人"
+  },
+  "avatar": {
+    "kind": "none"
+  },
+  "blocks": []
+}

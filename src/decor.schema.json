@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/<user>/mcd-receipt-studio/src/decor.schema.json",
+  "title": "麦门日记 · 素材包契约 decos.json",
+  "description": "三层可换模型的 L2（皮肤）与 L3（装饰）素材清单。全部为内置预设，页面不提供任何用户上传（决策 D-022）。装饰支持内联 SVG，头图另支持内置透明 PNG；禁止外链图片与外链字体。",
+  "version": "0.1.0",
+  "catalog": {
+    "skins": {
+      "description": "皮肤预设（L2）：一组 CSS 变量值。模板只写 var(--rct-*) 取色，换皮肤 = 换变量。",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "vars"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string", "description": "展示名（右栏色卡）" },
+          "textureFile": { "type": "string", "description": "可选的内置 PNG 纸纹，构建时内联到单文件页面" },
+          "vars": {
+            "type": "object",
+            "description": "CSS 变量组，键名须以 --rct- 开头",
+            "properties": {
+              "--rct-paper": { "type": "string", "description": "纸张底色" },
+              "--rct-ink": { "type": "string", "description": "主文字色" },
+              "--rct-ink-weak": { "type": "string", "description": "次要文字色" },
+              "--rct-accent": { "type": "string", "description": "强调色" },
+              "--rct-line": { "type": "string", "description": "分隔线色" },
+              "--rct-texture": { "type": "string", "description": "纸纹（CSS background-image，可为 none）" }
+            }
+          }
+        }
+      }
+    },
+    "slots": {
+      "description": "装饰槽位（L3）：模板用 data-slot=\"<slotId>\" 预留空位，引擎按 receipt.deco[] 注入素材。空槽位不占位。v0.4.1：移除胶带 tape-top（D-034）。",
+      "properties": {
+        "band": { "type": "string", "description": "装饰条（票头 / 票尾各一条，横贯票面）" },
+        "header-art": { "type": "string", "description": "创意头图 / 品牌 logo" },
+        "rule": { "type": "string", "description": "分割线（头尾复用同一槽位）" },
+        "watermark": { "type": "string", "description": "铺满整票的背景水印（引擎自动置于内容之下）" },
+        "stamp": { "type": "string", "description": "印章（日期章 / 已解锁章 等），盖在签名区" },
+        "sticker": { "type": "string", "description": "任意一枚贴纸" },
+        "avatar": { "type": "string", "description": "头像（v0.3.4 起停用，仅保留素材以兼容旧工程包，见 D-030）" }
+      }
+    },
+    "deco": {
+      "description": "装饰素材库：内联 SVG 或内置透明 PNG 头图。按 slot 分组，组内互斥可切换，可清空。",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "slot"],
+        "oneOf": [
+          { "required": ["svg"], "not": { "required": ["pngFile"] } },
+          { "required": ["pngFile"], "not": { "required": ["svg"] } }
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "slot": { "type": "string", "enum": ["band", "header-art", "rule", "watermark", "stamp", "sticker"] },
+          "displayHeight": { "type": "integer", "minimum": 40, "maximum": 140, "description": "可选：插画头图在票面上的高度（px）；切换普通头图时自动恢复模板高度" },
+          "svg": { "type": "string", "description": "内联 SVG 源码；禁止 script/foreignObject/image/use" },
+          "pngFile": { "type": "string", "pattern": "^images/[a-z0-9-]+\\.png$", "description": "仅 header-art 可用；内置透明 RGBA PNG，相对 src/decos 的路径，构建时内联" }
+        }
+      }
+    },
+    "avatars": {
+      "description": "内置头像库（8 款，几何色块 + 首字）。MCP 无头像接口，故全部为原创预设。",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "svg"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "svg": { "type": "string" }
+        }
+      }
+    }
+  },
+  "hardRules": [
+    "装饰素材使用内联 SVG；头图另可使用内置透明 PNG；禁止 image / use xlink:href 外链",
+    "禁止外部字体；只用系统字体栈",
+    "禁止 script / foreignObject（会破坏单文件产物与导出）",
+    "不提供用户上传（页面无任何文件选择入口）"
+  ]
+}

@@ -1,0 +1,461 @@
+/*!
+ * 麦门日记 · 工作台样式  v0.3.0
+ * ------------------------------------------------------------------
+ * 三栏工作台：① 左栏数据源　② 中栏小票舞台　③ 右栏编辑与装饰
+ * ⚠️ 本文件全部为「占位级」视觉：目标是让结构、层级、交互可用可读，
+ *    便于美术后续整体替换。所有待设计位置见 PLACEHOLDERS.md。
+ *    美术替换约定：只改样式与素材，不改类名、不改 DOM 结构。
+ *
+ * 配色一律走 :root 的 --rct-* 变量（engine.css 里定义），
+ * 与模板皮肤（.rct-scope 内的 --rct-paper 等）互不干扰。
+ */
+
+body { background: #edf0f2; }
+
+/* ============================ 三栏布局 ============================ */
+
+.rct-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr) minmax(0, 340px);
+  gap: 16px;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+  align-items: start;
+}
+
+.rct-main { min-width: 0; }
+
+/* 中栏里的引擎容器不再自带左右内边距（栅格已经留够空隙） */
+.rct-workspace .rct-app { padding: 0 0 12px; }
+
+@media (max-width: 1240px) {
+  .rct-workspace { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); }
+  .rct-editor { grid-column: 1 / -1; }
+  .rct-editor__body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+}
+
+@media (max-width: 820px) {
+  .rct-workspace { grid-template-columns: minmax(0, 1fr); }
+  .rct-editor__body { grid-template-columns: minmax(0, 1fr); }
+  .rct-rail,
+  .rct-editor { position: static; max-height: none; }
+}
+
+/* ========================== 栏通用外观 ========================== */
+
+.rct-rail,
+.rct-editor {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 14px;
+  background: var(--rct-surface);
+  border: 1px solid var(--rct-line);
+  border-radius: 16px;
+  box-shadow: 0 6px 22px rgba(47, 42, 36, .07);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--rct-ink);
+  font-size: 13px;
+}
+
+.rct-rail__head { margin-bottom: 12px; }
+.rct-rail__title { font-size: 15px; font-weight: 700; }
+.rct-rail__sub { margin-top: 3px; font-size: 11px; color: var(--rct-ink-weak); }
+
+.rct-rail__list { display: flex; flex-direction: column; gap: 6px; }
+
+.rct-rail__detail {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--rct-line);
+}
+.rct-rail__sub-title { margin: 0 0 8px; font-size: 12px; font-weight: 600; }
+.rct-rail__filter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.rct-rail__empty { padding: 16px 0; text-align: center; }
+.rct-rail__empty-text { margin-top: 8px; font-size: 11px; color: var(--rct-ink-weak); }
+
+/* ===================== 左栏 · 数据源入口卡（3 个） ===================== */
+
+.rct-src {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  grid-template-areas: "icon main count" ". thumb thumb";
+  align-items: center;
+  gap: 4px 8px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--rct-line);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.rct-src:hover { border-color: #d9d2c7; box-shadow: 0 3px 12px rgba(47, 42, 36, .09); }
+.rct-src.is-active { border-color: var(--rct-accent); background: rgba(215, 38, 30, .045); }
+.rct-src .rct-ph--icon { grid-area: icon; }
+.rct-src__main { grid-area: main; min-width: 0; }
+.rct-src__name { font-size: 13px; font-weight: 600; }
+.rct-src__tpl {
+  margin-top: 2px;
+  font-size: 10px;
+  color: var(--rct-ink-weak);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 徽标：数值 + 单位/分母。「114 分」「1/17」「6 项」都能自解释，
+   不再是光秃秃的数字（曾经的 "1" 到底是账户数还是积分数，没人看得懂）。
+   非选中态用中性米色，不用红色——红色是"未读消息"的视觉语言，这里是静态计数。 */
+.rct-src__count {
+  grid-area: count;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  min-width: 22px;
+  padding: 1px 7px 2px;
+  border-radius: 999px;
+  background: #f4f1ec;
+  color: var(--rct-ink-weak);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.rct-src__count-n { font-size: 13px; font-weight: 700; color: var(--rct-ink); }
+.rct-src__count-u { opacity: .66; }
+.rct-src.is-active .rct-src__count { background: var(--rct-accent); }
+.rct-src.is-active .rct-src__count-n { color: #fff; }
+.rct-src.is-active .rct-src__count-u { color: #fff; opacity: .82; }
+.rct-src .rct-ph--thumb { grid-area: thumb; width: 100%; height: 24px; }
+/* 入口卡横条缩略：**只有 templates/<id>/thumb.png 存在时才渲染**（builder 内联成 data URI）。
+   没素材就完全没有这个元素，网格第二行高度自动塌成 0，把空间让给下面真正要点的展开区。 */
+.rct-src__thumb {
+  grid-area: thumb;
+  width: 100%;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f1ec;
+}
+.rct-src__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================== 芯片 ============================== */
+
+.rct-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--rct-line);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  color: var(--rct-ink-weak);
+  cursor: pointer;
+}
+.rct-chip.is-active { border-color: var(--rct-accent); color: var(--rct-accent); background: rgba(215, 38, 30, .06); }
+.rct-chip--static { cursor: default; }
+.rct-chip--btn:hover { border-color: #d9d2c7; color: var(--rct-ink); }
+.rct-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rct-chips:not(:last-child) { margin-bottom: 8px; }
+
+/* ============================== 卡片 ============================== */
+
+.rct-cards { display: flex; flex-direction: column; gap: 8px; }
+
+.rct-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px;
+  border: 1px solid var(--rct-line);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .12s ease, box-shadow .12s ease, transform .12s ease;
+}
+.rct-card:hover { border-color: #d9d2c7; box-shadow: 0 3px 12px rgba(47, 42, 36, .09); }
+.rct-card:active { transform: translateY(1px); }
+.rct-card.is-picked { border-color: var(--rct-accent); background: rgba(215, 38, 30, .035); }
+/* 已取消 / 已退单：可以回看，但视觉上必须退到背景里，也不该成为首屏默认 */
+.rct-card.is-void { opacity: .6; }
+.rct-card.is-void .rct-card__amount { color: var(--rct-ink-weak); text-decoration: line-through; }
+.rct-card.is-void .rct-card__cta { color: var(--rct-ink-weak); }
+.rct-card.is-picked.is-void { opacity: .82; }
+.rct-card--static { cursor: default; }
+.rct-card--static:hover { box-shadow: none; border-color: var(--rct-line); }
+
+.rct-card__main { flex: 1 1 auto; min-width: 0; }
+.rct-card__title { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rct-card__meta { margin-top: 2px; font-size: 11px; color: var(--rct-ink-weak); }
+.rct-card__desc {
+  margin-top: 3px;
+  font-size: 11px;
+  color: #9a9287;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rct-card__side { flex: 0 0 auto; text-align: right; }
+.rct-card__amount { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rct-card__cta { margin-top: 3px; font-size: 10px; color: var(--rct-accent); }
+
+.rct-cards .rct-check,
+.rct-block-row .rct-check { margin-right: 0; }
+
+.rct-check {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--rct-line);
+  border-radius: 5px;
+  background: #fff;
+  color: transparent;
+  font: inherit;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.rct-card.is-picked .rct-check,
+.rct-check.is-on { border-color: var(--rct-accent); background: rgba(215, 38, 30, .1); color: var(--rct-accent); }
+.rct-check[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* ============================== 统计卡 ============================== */
+
+.rct-stat-card {
+  padding: 12px;
+  border: 1px solid var(--rct-line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff, #fdfcf9);
+}
+.rct-stat-card + .rct-stat-card,
+.rct-stat-grid + .rct-stat-card { margin-top: 8px; }
+.rct-stat-card__label { font-size: 11px; color: var(--rct-ink-weak); }
+.rct-stat-card__value { margin-top: 4px; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rct-stat-card__hint { margin-top: 4px; font-size: 11px; color: var(--rct-ink-weak); line-height: 1.5; }
+
+.rct-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 8px; }
+.rct-stat-card--mini { padding: 9px; }
+.rct-stat-card--mini .rct-stat-card__value {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rct-tip { margin: 8px 0 0; font-size: 11px; color: var(--rct-ink-weak); line-height: 1.6; }
+
+/* ========================== 中栏 · 面包屑 ========================== */
+
+.rct-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  background: var(--rct-surface);
+  border: 1px solid var(--rct-line);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(47, 42, 36, .05);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  color: var(--rct-ink);
+}
+.rct-crumb__now { font-weight: 700; }
+.rct-crumb__sep { color: var(--rct-line); }
+.rct-crumb__data { color: var(--rct-ink-weak); }
+.rct-crumb__tpl { margin-left: auto; color: var(--rct-accent); font-weight: 600; }
+
+/* ======================= 右栏 · 编辑与装饰 ======================= */
+
+.rct-editor__title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.rct-editor__body { min-width: 0; }
+
+.rct-sec { margin-bottom: 14px; }
+.rct-sec:last-child { margin-bottom: 4px; }
+.rct-sec__title {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rct-ink);
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--rct-line);
+}
+.rct-sec__body { display: flex; flex-direction: column; gap: 6px; }
+
+/* 栏位行 */
+.rct-block-row { display: flex; align-items: center; gap: 6px; }
+/* 无数据支撑的栏位（D-035）：整行灰显 + 划掉栏位名，开关与排序按钮均不可用 */
+.rct-block-row.is-locked { opacity: .42; }
+.rct-block-row.is-locked .rct-block-name { text-decoration: line-through; }
+.rct-block-hint {
+  flex: 0 0 auto;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .06);
+  color: var(--rct-ink-weak, #8b8378);
+  font-size: 9px;
+  letter-spacing: .5px;
+}
+.rct-block-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rct-mini {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--rct-line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--rct-ink-weak);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+.rct-mini:hover { border-color: #d9d2c7; color: var(--rct-ink); }
+.rct-mini[disabled] { opacity: .35; cursor: not-allowed; }
+.rct-mini--danger:hover { border-color: var(--rct-accent); color: var(--rct-accent); }
+
+/* 皮肤色卡 */
+.rct-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.rct-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--rct-line);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  color: var(--rct-ink-weak);
+  cursor: pointer;
+}
+.rct-swatch.is-active { border-color: var(--rct-accent); color: var(--rct-accent); background: rgba(215, 38, 30, .05); }
+
+.rct-paper-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.rct-paper {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  min-width: 94px; padding: 9px 10px; border: 1px solid var(--rct-line);
+  border-radius: 12px; background: #fff; color: var(--rct-ink); cursor: pointer;
+}
+.rct-paper.is-active { border-color: var(--rct-accent); color: var(--rct-accent); background: rgba(215, 38, 30, .05); }
+.rct-paper__sample { display: block; width: 44px; height: 54px; background: #fdf6e3; border: 1px solid #d8cfc1; }
+.rct-paper__sample--strip { border-radius: 3px; }
+.rct-paper__sample--scallop {
+  border: 0;
+  clip-path: path("M 0 0 L 4 0 C 4 3 6 5 9 5 C 12 5 14 3 14 0 L 16 0 C 16 3 18 5 21 5 C 24 5 26 3 26 0 L 28 0 C 28 3 30 5 33 5 C 36 5 38 3 38 0 L 44 0 L 44 54 L 38 54 C 38 51 36 49 33 49 C 30 49 28 51 28 54 L 26 54 C 26 51 24 49 21 49 C 18 49 16 51 16 54 L 14 54 C 14 51 12 49 9 49 C 6 49 4 51 4 54 L 0 54 Z");
+}
+.rct-paper__sample--tearoff {
+  position: relative;
+  border: 0;
+  clip-path: path("M 0 0 L 4 0 C 4 3 6 5 9 5 C 12 5 14 3 14 0 L 16 0 C 16 3 18 5 21 5 C 24 5 26 3 26 0 L 28 0 C 28 3 30 5 33 5 C 36 5 38 3 38 0 L 44 0 L 44 16 C 41.8 16 40 17.8 40 20 C 40 22.2 41.8 24 44 24 L 44 54 L 38 54 C 38 51 36 49 33 49 C 30 49 28 51 28 54 L 26 54 C 26 51 24 49 21 49 C 18 49 16 51 16 54 L 14 54 C 14 51 12 49 9 49 C 6 49 4 51 4 54 L 0 54 L 0 24 C 2.2 24 4 22.2 4 20 C 4 17.8 2.2 16 0 16 Z M 11.5 20 C 11.5 19.17 10.83 18.5 10 18.5 C 9.17 18.5 8.5 19.17 8.5 20 C 8.5 20.83 9.17 21.5 10 21.5 C 10.83 21.5 11.5 20.83 11.5 20 Z M 19.5 20 C 19.5 19.17 18.83 18.5 18 18.5 C 17.17 18.5 16.5 19.17 16.5 20 C 16.5 20.83 17.17 21.5 18 21.5 C 18.83 21.5 19.5 20.83 19.5 20 Z M 27.5 20 C 27.5 19.17 26.83 18.5 26 18.5 C 25.17 18.5 24.5 19.17 24.5 20 C 24.5 20.83 25.17 21.5 26 21.5 C 26.83 21.5 27.5 20.83 27.5 20 Z M 35.5 20 C 35.5 19.17 34.83 18.5 34 18.5 C 33.17 18.5 32.5 19.17 32.5 20 C 32.5 20.83 33.17 21.5 34 21.5 C 34.83 21.5 35.5 20.83 35.5 20 Z");
+}
+.rct-paper__name { font-size: 11px; white-space: nowrap; }
+.rct-swatch__chip {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--rct-line);
+  border-radius: 8px;
+}
+.rct-swatch__name { font-size: 10px; }
+
+/* 装饰素材 */
+.rct-deco__label { font-size: 11px; color: var(--rct-ink-weak); margin-bottom: 5px; }
+.rct-deco-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 10px; }
+.rct-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid var(--rct-line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--rct-ink);
+  cursor: pointer;
+}
+.rct-deco.is-active { border-color: var(--rct-accent); background: rgba(215, 38, 30, .06); }
+.rct-deco__svg { display: block; width: 100%; height: 100%; }
+.rct-deco__svg svg { width: 100%; height: 100%; display: block; }
+
+/* 明细行 */
+.rct-item-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
+  border: 1px solid var(--rct-line);
+  border-radius: 9px;
+  background: #fff;
+}
+.rct-item-row__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rct-btn--wide { width: 100%; margin-top: 2px; }
+
+/* ==================== 占位元素（美术待接入） ====================
+   统一使用 .rct-ph + data-placeholder="<占位id>"，便于美术按清单定位替换。
+   清单见 PLACEHOLDERS.md。 */
+.rct-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #cfc8bd;
+  border-radius: 8px;
+  background: repeating-linear-gradient(45deg, #faf8f4 0 6px, #f3efe8 6px 12px);
+  color: #a89f92;
+  font-size: 9px;
+  line-height: 1.3;
+  text-align: center;
+  white-space: pre-line;
+  overflow: hidden;
+}
+.rct-ph--icon { width: 24px; height: 24px; border-radius: 7px; border-style: none; background: transparent; font-size: 14px; }
+.rct-ph--thumb { flex: 0 0 auto; width: 100%; }
+.rct-ph--illus { width: 100%; height: 72px; }
+
+/* 卡片里的缩略图是固定方块（左栏数据实例：用于辨认数据，不参与导出） */
+.rct-card .rct-ph--thumb { width: 44px; height: 44px; border-radius: 9px; }
+/* 订单卡餐品图：麦当劳 CDN 的真实商品图，**只出现在左栏**帮用户辨认订单（决策 D-021），
+   不参与导出、不进小票，因此不需要处理 canvas 跨域。加载失败时降级为首字方块。 */
+.rct-thumb {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #f4f1ec;
+}
+.rct-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.rct-thumb.is-broken { border: 1px dashed var(--rct-line); background: transparent; }
+.rct-thumb__fallback { font-size: 15px; font-weight: 600; color: var(--rct-ink-weak); }
+
+.rct-src.is-active .rct-ph--icon { background: #f4f1ec; border-radius: 7px; }

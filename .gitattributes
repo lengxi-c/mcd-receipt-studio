@@ -1,0 +1,10 @@
+# 统一换行符为 LF，避免 Windows 检出后产生纯 diff 噪声
+* text=auto eol=lf
+
+# 二进制素材不做换行符转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.ico binary

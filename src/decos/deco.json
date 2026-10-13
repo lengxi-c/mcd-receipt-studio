@@ -1,0 +1,351 @@
+{
+  "_comment": "装饰素材库（三层可换模型的 L3）。默认使用内联 SVG；头图另支持内置透明 PNG。禁止外链与外链字体。按 slot 分组，组内互斥可切换，可清空。",
+  "version": 3,
+  "slots": [
+    {
+      "id": "band",
+      "name": "装饰条",
+      "hint": "横贯票面的纹样带，头尾通用；高度约 10px，宽度自适应"
+    },
+    {
+      "id": "header-art",
+      "name": "头图",
+      "hint": "票头主视觉 / 创意 logo；宽度自适应，位图头图高度约 96px"
+    },
+    {
+      "id": "rule",
+      "name": "分割线",
+      "hint": "分隔线，头尾多处复用；高度约 8px"
+    },
+    {
+      "id": "watermark",
+      "name": "水印",
+      "hint": "铺满整张票的背景淡纹；引擎已自动置于内容之下"
+    },
+    {
+      "id": "stamp",
+      "name": "印章",
+      "hint": "盖在票面上，正方形"
+    },
+    {
+      "id": "sticker",
+      "name": "贴纸",
+      "hint": "任意一枚小贴纸"
+    }
+  ],
+  "deco": [
+    {
+      "id": "band-solid",
+      "name": "实色条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><rect width=\"100%\" height=\"100%\" fill=\"currentColor\" opacity=\".85\"/></svg>"
+    },
+    {
+      "id": "band-dots",
+      "name": "圆点条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bdot\" width=\"10\" height=\"8\" patternUnits=\"userSpaceOnUse\"><circle cx=\"5\" cy=\"4\" r=\"1.7\" fill=\"currentColor\" opacity=\".6\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bdot)\"/></svg>"
+    },
+    {
+      "id": "band-stripe",
+      "name": "斜纹条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bstp\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(45)\"><rect width=\"5\" height=\"10\" fill=\"currentColor\" opacity=\".5\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bstp)\"/></svg>"
+    },
+    {
+      "id": "band-zigzag",
+      "name": "锯齿条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bzig\" width=\"8\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 8L4 0l4 8z\" fill=\"currentColor\" opacity=\".5\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bzig)\"/></svg>"
+    },
+    {
+      "id": "band-scallop",
+      "name": "扇贝条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bsca\" width=\"12\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 8a6 6 0 0112 0z\" fill=\"currentColor\" opacity=\".5\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bsca)\"/></svg>"
+    },
+    {
+      "id": "band-dash",
+      "name": "短划条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bdsh\" width=\"12\" height=\"8\" patternUnits=\"userSpaceOnUse\"><rect x=\"0\" y=\"3\" width=\"7\" height=\"2\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bdsh)\"/></svg>"
+    },
+    {
+      "id": "band-check",
+      "name": "棋盘条",
+      "slot": "band",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"bchk\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><rect width=\"5\" height=\"5\" fill=\"currentColor\" opacity=\".45\"/><rect x=\"5\" y=\"5\" width=\"5\" height=\"5\" fill=\"currentColor\" opacity=\".45\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#bchk)\"/></svg>"
+    },
+    {
+      "id": "rule-wave",
+      "name": "波浪线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rwav\" width=\"16\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 5q4-4 8 0t8 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\".8\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rwav)\"/></svg>"
+    },
+    {
+      "id": "rule-tilde",
+      "name": "双波浪",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rtil\" width=\"16\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 3q4-3 8 0t8 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".7\"/><path d=\"M0 8q4-3 8 0t8 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".45\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rtil)\"/></svg>"
+    },
+    {
+      "id": "rule-dashed",
+      "name": "虚线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rdsh\" width=\"12\" height=\"8\" patternUnits=\"userSpaceOnUse\"><rect x=\"0\" y=\"3.2\" width=\"7\" height=\"1.6\" fill=\"currentColor\" opacity=\".75\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rdsh)\"/></svg>"
+    },
+    {
+      "id": "rule-dotted",
+      "name": "点线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rdot\" width=\"8\" height=\"8\" patternUnits=\"userSpaceOnUse\"><circle cx=\"4\" cy=\"4\" r=\"1.2\" fill=\"currentColor\" opacity=\".75\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rdot)\"/></svg>"
+    },
+    {
+      "id": "rule-double",
+      "name": "双横线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rdbl\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><rect x=\"0\" y=\"2\" width=\"10\" height=\"1.2\" fill=\"currentColor\" opacity=\".8\"/><rect x=\"0\" y=\"7\" width=\"10\" height=\"1.2\" fill=\"currentColor\" opacity=\".45\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rdbl)\"/></svg>"
+    },
+    {
+      "id": "rule-zigzag",
+      "name": "锯齿线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rzig\" width=\"10\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 6l5-4 5 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" opacity=\".8\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rzig)\"/></svg>"
+    },
+    {
+      "id": "rule-scallop",
+      "name": "扇贝线",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rsca\" width=\"10\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 7a5 5 0 0110 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\".8\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rsca)\"/></svg>"
+    },
+    {
+      "id": "rule-diamond",
+      "name": "菱形链",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rdia\" width=\"12\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M6 1.5L9.5 4 6 6.5 2.5 4z\" fill=\"currentColor\" opacity=\".6\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rdia)\"/></svg>"
+    },
+    {
+      "id": "rule-cross",
+      "name": "加号链",
+      "slot": "rule",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"rcrs\" width=\"12\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M6 1v6M3.5 4h5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\".7\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#rcrs)\"/></svg>"
+    },
+    {
+      "id": "wm-side-doodles",
+      "name": "右侧手绘小伙伴",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmsidefriends\" width=\"320\" height=\"280\" patternUnits=\"userSpaceOnUse\"><g transform=\"translate(235 22)\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 64q-11-13-5-30 6-16 22-12 17-4 23 13 5 16-5 29-17 12-35 0z\" stroke-width=\"2.5\" opacity=\".55\"/><path d=\"M10 40q20 8 43 0M13 48q17 7 38 0M17 57q13 5 31 0\" stroke-width=\"2\" opacity=\".45\"/><circle cx=\"23\" cy=\"35\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"39\" cy=\"35\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M27 41q4 4 8 0M4 23l-5-5m62 10 5-6M64 54l7 1\" stroke-width=\"1.8\"/><path d=\"M31 116q-10-18-2-27 5-5 11 2 7-12 13-8 8 6 0 24l-5 17-13 2z\" stroke-width=\"2.5\" opacity=\".55\"/><path d=\"M33 103q10 6 18-2M39 112q5 3 10-1M30 126q-8 10-18 6m36-7q7 10 17 6\" stroke-width=\"1.8\"/><circle cx=\"32\" cy=\"147\" r=\"2\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M6 181q-8-14 3-18 8-2 10 5 7-10 15-2 8 9-2 18l-13 12zM54 175l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM20 231q10-11 19 0 9-11 19 0m-41 8q10-11 21 0 10-11 21 0\" stroke-width=\"2\" opacity=\".5\"/></g></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmsidefriends)\"/></svg>"
+    },
+    {
+      "id": "wm-side-flowers",
+      "name": "右侧涂鸦花朵",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmsideflowers\" width=\"320\" height=\"310\" patternUnits=\"userSpaceOnUse\"><g transform=\"translate(244 22)\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" opacity=\".58\"><path d=\"M24 54q-17-2-14-13 2-9 13-7-6-14 5-18 10-2 13 11 11-9 18-1 8 10-3 18 14 6 8 17-5 10-17 4-2 14-14 13-10-2-9-15z\"/><circle cx=\"36\" cy=\"47\" r=\"7\"/><path d=\"M34 80q-2 27 11 49M39 105q-20-11-21-2 1 9 23 8M42 114q15-14 20-8 4 9-17 15\"/><path d=\"M10 164q-12-13-3-21 8-7 17 3 7-13 17-8 11 6 1 21-7 10-18 19z\"/><path d=\"M56 151l2 7 7 2-7 2-2 7-2-7-7-2 7-2zM16 205l2 5 5 2-5 2-2 5-2-5-5-2 5-2z\"/><path d=\"M18 254q8-18 21 0 13-18 22 0M23 264q8-18 17 0 13-18 18 0M32 278q4-6 9 0\"/><circle cx=\"8\" cy=\"94\" r=\"2\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"59\" cy=\"218\" r=\"2\" fill=\"currentColor\" stroke=\"none\"/></g></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmsideflowers)\"/></svg>"
+    },
+    {
+      "id": "wm-grid",
+      "name": "网格纹",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmg\" width=\"18\" height=\"18\" patternUnits=\"userSpaceOnUse\"><path d=\"M18 0H0V18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".7\" opacity=\".5\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmg)\"/></svg>"
+    },
+    {
+      "id": "wm-dots",
+      "name": "点阵纹",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmd\" width=\"14\" height=\"14\" patternUnits=\"userSpaceOnUse\"><circle cx=\"7\" cy=\"7\" r=\"1.1\" fill=\"currentColor\" opacity=\".5\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmd)\"/></svg>"
+    },
+    {
+      "id": "wm-stripe",
+      "name": "斜纹",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wms\" width=\"18\" height=\"18\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(45)\"><rect width=\"6\" height=\"18\" fill=\"currentColor\" opacity=\".28\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wms)\"/></svg>"
+    },
+    {
+      "id": "wm-cross",
+      "name": "十字点",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmc\" width=\"20\" height=\"20\" patternUnits=\"userSpaceOnUse\"><path d=\"M10 5v10M5 10h10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".9\" opacity=\".45\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmc)\"/></svg>"
+    },
+    {
+      "id": "wm-arc",
+      "name": "弧线",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wma\" width=\"26\" height=\"26\" patternUnits=\"userSpaceOnUse\"><path d=\"M0 26A26 26 0 0126 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".9\" opacity=\".45\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wma)\"/></svg>"
+    },
+    {
+      "id": "wm-star",
+      "name": "星点",
+      "slot": "watermark",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\"><defs><pattern id=\"wmst\" width=\"24\" height=\"24\" patternUnits=\"userSpaceOnUse\"><path d=\"M12 7l1.5 3.5L17 12l-3.5 1.5L12 17l-1.5-3.5L7 12l3.5-1.5z\" fill=\"currentColor\" opacity=\".4\"/></pattern></defs><rect width=\"100%\" height=\"100%\" fill=\"url(#wmst)\"/></svg>"
+    },
+    {
+      "id": "hdr-png-smile-preview",
+      "name": "双拱门笑脸",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-smile-fries.png"
+    },
+    {
+      "id": "hdr-png-receipt-character",
+      "name": "小票角色",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-receipt-character.png"
+    },
+    {
+      "id": "hdr-png-lovin-fries",
+      "name": "标语薯条",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-lovin-fries.png"
+    },
+    {
+      "id": "hdr-png-arches-fries",
+      "name": "双拱门薯条",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-arches-fries.png"
+    },
+    {
+      "id": "hdr-png-burger-drink",
+      "name": "汉堡饮料",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-burger-drink.png"
+    },
+    {
+      "id": "hdr-png-mcdonalds-wordmark",
+      "name": "McDonald's 字标",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-mcdonalds-wordmark.png"
+    },
+    {
+      "id": "hdr-png-lovin-slogan-fries",
+      "name": "I'm lovin' it 薯条",
+      "slot": "header-art",
+      "displayHeight": 96,
+      "pngFile": "images/hdr-lovin-slogan-fries.png"
+    },
+    {
+      "id": "hdr-arch",
+      "name": "拱门头",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 48\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\"><path d=\"M40 46V26a40 40 0 0180 0v20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".6\"/><path d=\"M56 46V28a24 24 0 0148 0v18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\" opacity=\".45\"/><path d=\"M16 46h208\" stroke=\"currentColor\" stroke-width=\"1.6\" opacity=\".7\"/></svg>"
+    },
+    {
+      "id": "hdr-banner",
+      "name": "缎带横幅",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 48\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\"><path d=\"M46 20h148v14H46z\" fill=\"currentColor\" opacity=\".18\"/><path d=\"M46 20h148v14H46z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" opacity=\".7\"/><path d=\"M46 20l-14-6v26l14-6M194 20l14-6v26l-14-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".55\"/><path d=\"M60 27h120\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".4\" stroke-dasharray=\"3 4\"/></svg>"
+    },
+    {
+      "id": "hdr-frame",
+      "name": "双线画框",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 48\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\"><path d=\"M28 6h184v36H28z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".65\"/><path d=\"M34 12h172v24H34z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".4\"/><path d=\"M28 6l12 12M212 6l-12 12M28 42l12-12M212 42l-12-12\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".35\"/></svg>"
+    },
+    {
+      "id": "hdr-seal",
+      "name": "圆形徽记",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 48\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\"><circle cx=\"120\" cy=\"24\" r=\"21\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".65\"/><circle cx=\"120\" cy=\"24\" r=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".45\" stroke-dasharray=\"3 3\"/><path d=\"M52 24h40M148 24h40\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".5\"/><path d=\"M120 14l3 7 7 3-7 3-3 7-3-7-7-3 7-3z\" fill=\"currentColor\" opacity=\".55\"/></svg>"
+    },
+    {
+      "id": "hdr-laurel",
+      "name": "月桂枝",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 48\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\"><path d=\"M60 42C40 34 36 18 44 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".55\"/><path d=\"M180 42c20-8 24-24 16-36\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".55\"/><path d=\"M46 14l8-2-2 8zM50 26l8 1-5 6zM58 36l7 3-7 4z\" fill=\"currentColor\" opacity=\".4\"/><path d=\"M194 14l-8-2 2 8zM190 26l-8 1 5 6zM182 36l-7 3 7 4z\" fill=\"currentColor\" opacity=\".4\"/><path d=\"M96 24h48\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".6\"/></svg>"
+    },
+    {
+      "id": "hdr-grid",
+      "name": "网格纸",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 40\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\"><defs><pattern id=\"g1\" width=\"8\" height=\"8\" patternUnits=\"userSpaceOnUse\"><path d=\"M8 0H0V8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".6\" opacity=\".45\"/></pattern></defs><rect width=\"240\" height=\"40\" fill=\"url(#g1)\"/><rect x=\"0\" y=\"36\" width=\"240\" height=\"2\" fill=\"currentColor\" opacity=\".5\"/></svg>"
+    },
+    {
+      "id": "hdr-stripe",
+      "name": "斜条纹",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 40\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\"><defs><pattern id=\"s1\" width=\"14\" height=\"14\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(45)\"><rect width=\"7\" height=\"14\" fill=\"currentColor\" opacity=\".3\"/></pattern></defs><rect width=\"240\" height=\"40\" fill=\"url(#s1)\"/></svg>"
+    },
+    {
+      "id": "hdr-dots",
+      "name": "圆点边",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 40\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\"><defs><pattern id=\"d1\" width=\"16\" height=\"16\" patternUnits=\"userSpaceOnUse\"><circle cx=\"8\" cy=\"8\" r=\"2.4\" fill=\"currentColor\" opacity=\".38\"/></pattern></defs><rect width=\"240\" height=\"40\" fill=\"url(#d1)\"/></svg>"
+    },
+    {
+      "id": "hdr-tear",
+      "name": "撕纸边",
+      "slot": "header-art",
+      "svg": "<svg viewBox=\"0 0 240 40\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\"><path d=\"M0 32l12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7 12-7 12 7V40H0z\" fill=\"currentColor\" opacity=\".35\"/></svg>"
+    },
+    {
+      "id": "stamp-unlocked",
+      "name": "已解锁",
+      "slot": "stamp",
+      "svg": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"32\" cy=\"32\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" opacity=\".85\"/><circle cx=\"32\" cy=\"32\" r=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-dasharray=\"3 3\" opacity=\".7\"/><text x=\"32\" y=\"30\" text-anchor=\"middle\" font-size=\"11\" font-family=\"system-ui,sans-serif\" fill=\"currentColor\">已获得</text><text x=\"32\" y=\"43\" text-anchor=\"middle\" font-size=\"9\" font-family=\"system-ui,sans-serif\" fill=\"currentColor\" opacity=\".8\">GOT IT</text></svg>"
+    },
+    {
+      "id": "stamp-date",
+      "name": "日期章",
+      "slot": "stamp",
+      "svg": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"12\" width=\"56\" height=\"40\" rx=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" opacity=\".85\"/><line x1=\"4\" y1=\"24\" x2=\"60\" y2=\"24\" stroke=\"currentColor\" stroke-width=\"1.4\" opacity=\".8\"/><text x=\"32\" y=\"21\" text-anchor=\"middle\" font-size=\"8\" font-family=\"system-ui,sans-serif\" fill=\"currentColor\" opacity=\".85\">MCD DAY</text><text x=\"32\" y=\"47\" text-anchor=\"middle\" font-size=\"15\" font-family=\"system-ui,sans-serif\" fill=\"currentColor\">2026</text></svg>"
+    },
+    {
+      "id": "stamp-star",
+      "name": "星章",
+      "slot": "stamp",
+      "svg": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M32 6l7.6 16.4L57 24.6 45 36l3 17.6L32 45.4 16 53.6 19 36 7 24.6 24.4 22.4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" opacity=\".85\"/><circle cx=\"32\" cy=\"32\" r=\"6\" fill=\"currentColor\" opacity=\".55\"/></svg>"
+    },
+    {
+      "id": "stamp-heart",
+      "name": "心章",
+      "slot": "stamp",
+      "svg": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M32 52S8 38 8 24a13 13 0 0122-9 13 13 0 0122 9c0 14-24 28-24 28z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" opacity=\".85\"/></svg>"
+    },
+    {
+      "id": "stamp-crown",
+      "name": "冠章",
+      "slot": "stamp",
+      "svg": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 24l10 8 12-16 12 16 10-8-5 26H15z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" opacity=\".85\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+      "id": "stk-burger",
+      "name": "汉堡标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"24\" r=\"21\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\"/><path d=\"M13 20h22M14 25h20M15 30h18\" stroke=\"currentColor\" stroke-width=\"2.2\" opacity=\".8\" stroke-linecap=\"round\"/><path d=\"M12 17c3-4 21-4 24 0\" fill=\"currentColor\" opacity=\".35\"/></svg>"
+    },
+    {
+      "id": "stk-fries",
+      "name": "薯条标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"14\" y=\"20\" width=\"20\" height=\"18\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\"/><path d=\"M18 20V10M24 20V7M30 20V10\" stroke=\"currentColor\" stroke-width=\"2.2\" opacity=\".8\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "id": "stk-cup",
+      "name": "饮料标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16 10h16l-2.5 28h-11z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\"/><path d=\"M20 6l6 12\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\" stroke-linecap=\"round\"/><path d=\"M14 10h20\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+      "id": "stk-heart",
+      "name": "爱心标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M24 39S8 29 8 19a9 9 0 0116-6 9 9 0 0116 6c0 10-16 20-16 20z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" opacity=\".82\"/></svg>"
+    },
+    {
+      "id": "stk-check",
+      "name": "对勾标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"24\" r=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" opacity=\".8\"/><path d=\"M15 25l7 7 12-14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\".85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+      "id": "stk-ticket",
+      "name": "票根标",
+      "slot": "sticker",
+      "svg": "<svg viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 16h32v16H8z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" opacity=\".8\"/><path d=\"M19 16v16M29 16v16\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-dasharray=\"2 3\" opacity=\".7\"/></svg>"
+    }
+  ]
+}

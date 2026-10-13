@@ -1,0 +1,37 @@
+{
+  "id": "fun-resume",
+  "name": "麦门履历（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "对应「⑤ 趣味统计」。纯计算得出的麦门履历：点单总数、累计花费、门店足迹、常点 TOP、最贵一单。当前为结构占位，美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 320,
+    "bleed": 6
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true,
+    "blocks": true,
+    "slots": true
+  },
+  "tokens": {
+    "ink": "#22303a",
+    "paper": "#f6f8f9",
+    "line": "#d5dde2"
+  },
+  "defaultDeco": {
+    "band": "band-dash",
+    "header-art": "hdr-frame",
+    "rule": "rule-dashed",
+    "watermark": "wm-grid"
+  }
+}

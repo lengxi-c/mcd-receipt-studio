@@ -1,0 +1,79 @@
+/* 麦门履历 —— 占位视觉（美术待接入） 作用域根：.rct-scope--fun-resume */
+
+.rct-scope--fun-resume .rcpt {
+  position: relative; width: 320px; padding: 20px 18px 22px;
+  background: var(--rct-paper, #f6f8f9); background-image: var(--rct-texture, none);
+  color: var(--rct-ink, #22303a); border-radius: 6px;
+  box-shadow: 0 14px 34px rgba(30, 45, 56, .14);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px; line-height: 1.6;
+}
+.rct-scope--fun-resume .rcpt__head { text-align: center; }
+.rct-scope--fun-resume .rcpt__art { height: 24px; margin: -6px -4px 6px; color: var(--rct-accent, #2f4a5c); opacity: .45; }
+.rct-scope--fun-resume .rcpt__art svg { width: 100%; height: 100%; display: block; }
+.rct-scope--fun-resume .rcpt__badge { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--rct-accent, #2f4a5c); color: #fff; font-size: 10px; letter-spacing: 1px; }
+.rct-scope--fun-resume .rcpt__title { margin: 8px 0 0; font-size: 16px; letter-spacing: 2px; }
+
+.rct-scope--fun-resume .rcpt__summary { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: rgba(47, 74, 92, .06); }
+.rct-scope--fun-resume .rcpt__summary-row { display: flex; justify-content: space-between; padding: 3px 0; }
+.rct-scope--fun-resume .rcpt__summary-row dt { color: var(--rct-ink-weak, #8a93a3); }
+.rct-scope--fun-resume .rcpt__summary-row dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.rct-scope--fun-resume .rcpt__stats { margin: 14px 0 0; padding: 0; list-style: none; }
+.rct-scope--fun-resume .rcpt__stat { padding: 8px 0; border-bottom: 1px dashed var(--rct-line, #d5dde2); }
+.rct-scope--fun-resume .rcpt__stat:last-child { border-bottom: none; }
+.rct-scope--fun-resume .rcpt__stat-top { display: flex; justify-content: space-between; gap: 10px; }
+.rct-scope--fun-resume .rcpt__stat-label { color: var(--rct-ink-weak, #8a93a3); font-size: 11px; }
+.rct-scope--fun-resume .rcpt__stat-value { font-weight: 700; text-align: right; }
+.rct-scope--fun-resume .rcpt__stat-hint { margin-top: 2px; color: var(--rct-ink-weak, #8a93a3); font-size: 10px; }
+
+.rct-scope--fun-resume .rcpt__stores { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rct-line, #d5dde2); }
+.rct-scope--fun-resume .rcpt__store-row { display: flex; align-items: baseline; gap: 6px; padding: 4px 0; }
+.rct-scope--fun-resume .rcpt__store-pin { color: var(--rct-accent, #2f4a5c); font-size: 11px; }
+.rct-scope--fun-resume .rcpt__store-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rct-scope--fun-resume .rcpt__store-spec { flex: 0 0 auto; color: var(--rct-ink-weak, #8a93a3); font-size: 11px; }
+
+.rct-scope--fun-resume .rcpt__journal { display: flex; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rct-line, #d5dde2); }
+.rct-scope--fun-resume .rcpt__journal-main { flex: 1 1 auto; min-width: 0; }
+.rct-scope--fun-resume .rcpt__mood-label { font-weight: 600; }
+.rct-scope--fun-resume .rcpt__note { margin: 4px 0 0; color: var(--rct-ink-weak, #8a93a3); font-size: 11px; }
+.rct-scope--fun-resume .rcpt__stamp { width: 50px; height: 50px; margin: 2px auto 6px; color: var(--rct-accent, #2f4a5c); opacity: .8; transform: rotate(-10deg); }
+.rct-scope--fun-resume .rcpt__stamp svg { width: 100%; height: 100%; display: block; }
+.rct-scope--fun-resume [data-block][data-block-visible="false"] { display: none; }
+
+/* ================= v0.4.0 票头 / 票尾分层（D-032）=================
+   水印 · 装饰条 · 分割线 · 字标 · slogan 横条 · 签名区
+   分层思路：占位状态下就要有层次，不必等美术；每一层同时是一个可换槽位。 */
+
+.rct-scope--fun-resume .rcpt { isolation: isolate; }   /* 建立层叠上下文，水印的 z-index:-1 才被关在票内 */
+
+.rct-scope--fun-resume .rcpt__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: var(--rct-ink-weak, #8b8378); opacity: .38;
+}
+.rct-scope--fun-resume .rcpt__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--fun-resume .rcpt__band { height: 10px; color: var(--rct-accent, #d7261e); opacity: .8; }
+.rct-scope--fun-resume .rcpt__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--fun-resume .rcpt__band--head { margin: -20px -18px 12px; }
+.rct-scope--fun-resume .rcpt__band--foot { margin: 0 -18px -22px; }
+
+.rct-scope--fun-resume .rcpt__rule { height: 8px; margin-top: 12px; color: var(--rct-accent, #d7261e); opacity: .7; }
+.rct-scope--fun-resume .rcpt__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--fun-resume .rcpt__rule--foot { margin: 0 0 12px; }
+
+.rct-scope--fun-resume .rcpt__art { height: 44px; margin: 4px 0 8px; }
+.rct-scope--fun-resume .rcpt__brand { font-size: 13px; font-weight: 800; letter-spacing: 5px; text-indent: 5px; }
+.rct-scope--fun-resume .rcpt__badge { margin-top: 2px; }
+.rct-scope--fun-resume .rcpt__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--rct-line, #c9c9c4); }
+.rct-scope--fun-resume .rcpt__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--fun-resume .rcpt__sign-k { color: var(--rct-ink-weak, #8b8378); font-size: 10px; letter-spacing: 1px; }
+.rct-scope--fun-resume .rcpt__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--fun-resume .rcpt__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+/* ---- 票尾（v0.4.1：只剩 分割线 + 尾图）---- */
+.rct-scope--fun-resume .rcpt__foot { margin-top: 14px; text-align: center; }
+.rct-scope--fun-resume .rcpt__points { margin-top: 6px; color: var(--rct-ink-weak, #8b8378); font-size: 11px; }

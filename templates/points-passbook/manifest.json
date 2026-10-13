@@ -1,0 +1,37 @@
+{
+  "id": "points-passbook",
+  "name": "积分存折（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "对应「② 积分存折」。以「存折」为隐喻：余额大字 + 收支明细 + 折算成巨无霸。当前为结构占位，美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 320,
+    "bleed": 6
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true,
+    "blocks": true,
+    "slots": true
+  },
+  "tokens": {
+    "ink": "#2b2b2b",
+    "paper": "#f7f4ec",
+    "line": "#ddd6c8"
+  },
+  "defaultDeco": {
+    "band": "band-stripe",
+    "header-art": "hdr-arch",
+    "rule": "rule-double",
+    "watermark": "wm-grid"
+  }
+}

@@ -1,0 +1,165 @@
+/* ==========================================================================
+   占位模板 · 经典收银小票
+   作用域根：.rct-scope--starter-classic（务必保留，避免污染其它模板）
+   美术设计待接入：视觉可由设计师整体替换，结构（data-field 标注）保持不变。
+   ========================================================================== */
+
+.rct-scope--starter-classic .rct-classic {
+  width: 320px;
+  padding: 18px 18px 14px;
+  /* 纸面不再由本元素绘制，改由 __paper 层绘制（底部要留出撕纸带） */
+  background: transparent;
+  color: #2b2b2b;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Courier New", "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .16);
+  position: relative;
+}
+
+/* 纸面层：垫在最底（比水印还低一层），底部让出 10px 给撕纸带。
+   v0.4.5 前这里用 mask-image 做锯齿，但 html2canvas 会静默忽略 mask ——
+   页面看得见锯齿、导出 PNG 变硬直边，所以改成「纸面 + 内联 SVG 竖条」两件套（D-039）。 */
+.rct-scope--starter-classic .rct-classic__paper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 10px;
+  background: #fdfdfa;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 顶部/底部锯齿带（结构位；底部那条由内联 SVG 画实） */
+.rct-scope--starter-classic .rct-classic__perf { height: 0; }
+.rct-scope--starter-classic .rct-classic__perf--bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  pointer-events: none;
+}
+.rct-scope--starter-classic .rct-classic__perf--bottom svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.rct-scope--starter-classic .rct-classic__head { text-align: center; }
+.rct-scope--starter-classic .rct-classic__mark {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #9a9a94;
+  margin-bottom: 6px;
+}
+.rct-scope--starter-classic .rct-classic__store {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.rct-scope--starter-classic .rct-classic__addr,
+.rct-scope--starter-classic .rct-classic__tel {
+  color: #7d7d78;
+  font-size: 11px;
+}
+
+.rct-scope--starter-classic .rct-classic__hr {
+  border-top: 1px dashed #c9c9c4;
+  margin: 10px 0;
+}
+
+.rct-scope--starter-classic .rct-classic__meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.rct-scope--starter-classic .rct-classic__meta-row dt { color: #7d7d78; }
+.rct-scope--starter-classic .rct-classic__meta-row dd { margin: 0; }
+
+.rct-scope--starter-classic .rct-classic__item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 0;
+}
+.rct-scope--starter-classic .rct-classic__item-name { flex: 1 1 auto; min-width: 0; word-break: break-all; }
+.rct-scope--starter-classic .rct-classic__item-qty { color: #7d7d78; width: 24px; text-align: right; }
+.rct-scope--starter-classic .rct-classic__item-amt { width: 62px; text-align: right; }
+
+.rct-scope--starter-classic .rct-classic__sum-row {
+  display: flex;
+  justify-content: space-between;
+}
+.rct-scope--starter-classic .rct-classic__sum-row--total {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.rct-scope--starter-classic .rct-classic__journal {
+  text-align: center;
+  padding: 4px 0 8px;
+}
+.rct-scope--starter-classic .rct-classic__mood-label {
+  font-size: 11px;
+  color: #7d7d78;
+  margin-bottom: 4px;
+}
+.rct-scope--starter-classic .rct-classic__note {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif;
+  font-size: 13px;
+  color: #3a3a3a;
+  line-height: 1.7;
+  min-height: 40px;
+}
+
+.rct-scope--starter-classic .rct-classic__points { margin-bottom: 6px; color: #7d7d78; font-size: 10px; }
+.rct-scope--starter-classic .rct-classic__barcode {
+  height: 26px;
+  margin: 10px 0 0;
+  /* 占位条形码：纯 CSS 条纹，非真实条码 */
+  background: repeating-linear-gradient(90deg, #2b2b2b 0 2px, transparent 2px 4px, #2b2b2b 4px 5px, transparent 5px 9px);
+  opacity: .8;
+}
+
+/* ================= v0.4.1 票头 / 票尾分层（D-032 / D-034）=================
+   与专属模板同一套层次语言：水印 · 装饰条 · 头图 · 分割线 · 字标 · 签名区 */
+
+.rct-scope--starter-classic .rct-classic { isolation: isolate; }
+
+.rct-scope--starter-classic .rct-classic__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: #8b8378; opacity: .34;
+}
+.rct-scope--starter-classic .rct-classic__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-classic .rct-classic__band { height: 10px; color: #d7261e; opacity: .75; }
+.rct-scope--starter-classic .rct-classic__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-classic .rct-classic__band--head { margin: -18px -18px 12px; }
+.rct-scope--starter-classic .rct-classic__band--foot { margin: 0 -18px -14px; }
+
+.rct-scope--starter-classic .rct-classic__art { height: 40px; margin: 0 0 6px; color: #d7261e; opacity: .7; }
+.rct-scope--starter-classic .rct-classic__art svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-classic .rct-classic__rule { height: 8px; margin-top: 10px; color: #d7261e; opacity: .65; }
+.rct-scope--starter-classic .rct-classic__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-classic .rct-classic__rule--foot { margin: 0 0 10px; }
+
+.rct-scope--starter-classic .rct-classic__brand {
+  font-size: 12px; font-weight: 800; letter-spacing: 5px; text-indent: 5px;
+  text-align: center; margin-bottom: 4px;
+}
+
+.rct-scope--starter-classic .rct-classic__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed #ddd6c8; }
+.rct-scope--starter-classic .rct-classic__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--starter-classic .rct-classic__sign-k { color: #8b8378; font-size: 10px; letter-spacing: 1px; }
+.rct-scope--starter-classic .rct-classic__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--starter-classic .rct-classic__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+.rct-scope--starter-classic .rct-classic__foot { margin-top: 12px; text-align: center; }

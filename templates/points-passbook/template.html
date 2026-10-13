@@ -1,0 +1,68 @@
+<!--
+  专属模板 · 积分存折  —— 对应「② 积分存折」
+  ⚠️ 美术占位：保留 data-block / data-slot 与类名。
+-->
+<div class="rcpt rcpt--points">
+
+  <div class="rcpt__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <header class="rcpt__head" data-block="head" data-block-name="抬头" data-block-lock="true">
+    <div class="rcpt__band rcpt__band--head" data-slot="band" data-editable="false"></div>
+    <div class="rcpt__art" data-slot="header-art" data-editable="false"></div>
+    <div class="rcpt__rule" data-slot="rule" data-editable="false"></div>
+    <div class="rcpt__brand" data-field="meta.brand" data-editable="false">麦门日记</div>
+    <div class="rcpt__badge" data-field="meta.badge" data-if="meta.badge" data-editable="false">✦ 麦门日记 ✦</div>
+    <h1 class="rcpt__title" data-field="meta.title">积分存折</h1>
+    <div class="rcpt__sub" data-field="member.level"></div>
+  </header>
+
+  <section class="rcpt__balance" data-block="balance" data-block-name="余额大字">
+    <div class="rcpt__balance-label" data-editable="false">可用积分</div>
+    <div class="rcpt__balance-value" data-field="member.points" data-format="number">0</div>
+  </section>
+
+  <dl class="rcpt__summary" data-block="summary" data-block-name="存取明细" data-repeat="summary">
+    <div class="rcpt__summary-row" data-repeat-item>
+      <dt data-field="label">名目</dt>
+      <dd data-field="value">—</dd>
+    </div>
+  </dl>
+
+  <ul class="rcpt__stats" data-block="stats" data-block-name="折算与提示" data-repeat="stats" data-block-require="stats">
+    <li class="rcpt__stat" data-repeat-item>
+      <span class="rcpt__stat-label" data-field="label">统计</span>
+      <span class="rcpt__stat-value" data-field="value">—</span>
+      <span class="rcpt__stat-hint" data-field="hint"></span>
+    </li>
+  </ul>
+
+  <section class="rcpt__journal" data-block="journal" data-block-name="手账区" data-block-optional="true">
+    <div class="rcpt__journal-main">
+      <div class="rcpt__mood-label" data-field="journal.moodLabel">今天的心情</div>
+      <p class="rcpt__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+    </div>
+  </section>
+
+  <!-- 签名区：会员编号取自 MCP accountId（真实数据），签名与日期供落款 -->
+  <section class="rcpt__sign" data-block="sign" data-block-name="签名区" data-block-optional="true">
+    <div class="rcpt__stamp" data-slot="stamp"></div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">会员编号</span>
+      <span class="rcpt__sign-v" data-field="member.no" data-editable="false">No. —</span>
+    </div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">签名</span>
+      <span class="rcpt__sign-v rcpt__sign-v--hand" data-field="journal.signature">—— 麦门日记</span>
+    </div>
+    <div class="rcpt__sign-row">
+      <span class="rcpt__sign-k" data-editable="false">日期</span>
+      <span class="rcpt__sign-v" data-field="order.datetime" data-format="date">—</span>
+    </div>
+  </section>
+
+  <footer class="rcpt__foot">
+    <div class="rcpt__rule rcpt__rule--foot" data-slot="rule" data-editable="false"></div>
+    <div class="rcpt__band rcpt__band--foot" data-slot="band" data-editable="false"></div>
+  </footer>
+
+</div>

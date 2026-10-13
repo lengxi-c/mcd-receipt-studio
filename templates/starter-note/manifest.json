@@ -1,0 +1,35 @@
+{
+  "id": "starter-note",
+  "name": "碎碎念留言条（占位）",
+  "version": "0.4.2",
+  "author": "麦门日记",
+  "status": "placeholder",
+  "description": "以碎碎念为主角、餐品退为配角的留白式卡片。当前为结构占位模板，最终美术设计待接入。",
+  "entry": "template.html",
+  "styles": [
+    "template.css"
+  ],
+  "size": {
+    "width": 400,
+    "bleed": 0
+  },
+  "export": {
+    "scale": 3,
+    "background": "#ffffff"
+  },
+  "capabilities": {
+    "editable": true,
+    "repeat": true
+  },
+  "tokens": {
+    "paper": "#ffffff",
+    "ink": "#2f2a24",
+    "accent": "#d7261e"
+  },
+  "defaultDeco": {
+    "band": "band-solid",
+    "header-art": "hdr-laurel",
+    "rule": "rule-tilde",
+    "watermark": "wm-dots"
+  }
+}

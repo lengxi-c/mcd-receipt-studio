@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/<user>/mcd-receipt-studio/src/receipt.schema.json",
+  "title": "麦门日记 · 数据契约 receipt.json",
+  "description": "引擎与模板之间唯一的数据契约。模板通过 data-field 标注按路径取数；引擎负责填充、编辑回写与导出。新增字段属向后兼容变更，删除或改名属破坏性变更（须升级 version）。",
+  "version": "0.3.0",
+  "type": "object",
+  "required": ["meta", "store", "order", "items", "amounts", "journal"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "小票元信息",
+      "properties": {
+        "receiptNo": { "type": "string", "description": "小票单号（可虚构，建议加 F- 前缀表明虚构）" },
+        "generatedAt": { "type": "string", "description": "生成时间（通常来自 now-time-info）" },
+        "source": { "type": "string", "enum": ["mcp", "demo", "manual"], "description": "数据来源：mcp=真实接口 / demo=示例 / manual=手填" },
+        "templateId": { "type": "string", "description": "生成时使用的模板 id" },
+        "kind": {
+          "type": "string",
+          "enum": ["order", "points", "activity", "collectible", "fun", "loot"],
+          "description": "当前启用：order=历史点单 / points=积分存折 / fun=趣味统计。activity / collectible / loot 为已退役类型，仅保留旧工程包兼容；对应模板不再随工作台构建。"
+        },
+        "title": { "type": "string", "description": "小票主标题（非点单类小票用，如「麦门足迹」）；点单类留空则回退显示门店名" },
+        "brand": { "type": "string", "description": "票头品牌字标（D-032），默认「麦门日记」，与门店名构成「品牌 → 门店」两级" },
+        "slogan": { "type": "string", "description": "【已废弃 · D-034】票尾 slogan 横条文案。v0.4.1 起票尾压平为「签名区 → 分割线 → 尾图」，不再渲染；字段保留仅为旧工程包回放，mappers 不再产出" },
+        "badge": { "type": "string", "description": "票头徽标文案（如「取餐码 35391」「恭喜我获得了！」）。为空则整块不渲染（D-028）" }
+      }
+    },
+    "store": {
+      "type": "object",
+      "description": "门店信息（来自 query-nearby-stores / query-order.storeAddress）",
+      "properties": {
+        "name": { "type": "string", "description": "门店名称" },
+        "code": { "type": "string", "description": "门店编码 storeCode（可脱敏）" },
+        "address": { "type": "string", "description": "门店地址" },
+        "phone": { "type": "string", "description": "门店/顾客中心电话（可选）" }
+      }
+    },
+    "order": {
+      "type": "object",
+      "description": "订单信息（order-list 索引 / query-order 明细 / now-time-info）",
+      "properties": {
+        "datetime": { "type": "string", "description": "下单时间。ISO 字符串或可被 Date 解析的值" },
+        "orderType": { "type": "string", "description": "取餐类型：到店自取 / 麦乐送" },
+        "takeWay": { "type": "string", "description": "取餐方式：堂食 / 外带" },
+        "orderNo": { "type": "string", "description": "订单号（可脱敏，建议仅保留后 4 位）" },
+        "pickupCode": { "type": "string", "description": "取餐码（来自 query-order.pickupCode，仪式感最强的元素）" },
+        "remark": { "type": "string", "description": "用户自己写的订单备注（来自 query-order.remark），原样印出" },
+        "address": { "type": "string", "description": "配送地址（来自 query-order.storeAddress，默认不使用）" }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "品项列表。模板内用 data-repeat=\"items\" 循环，字段用裸名（name/qty/amount）",
+      "items": {
+        "type": "object",
+        "required": ["name", "amount"],
+        "properties": {
+          "name": { "type": "string", "description": "品项名称（来自 query-meals / query-meal-detail）" },
+          "spec": { "type": "string", "description": "规格/套餐子项说明（如「无糖」「中杯」；套餐子项用「 ×1 + 」拼接）" },
+          "qty": { "type": "number", "description": "数量" },
+          "unitPrice": { "type": "number", "description": "单价（来自 query-order.orderProductList[].price）" },
+          "amount": { "type": "number", "description": "小计金额" },
+          "code": { "type": "string", "description": "餐品编码（可脱敏或不填）" },
+          "tag": { "type": "string", "description": "角标文案，如「新品」「随心配」「已收集」" },
+          "image": { "type": ["string", "null"], "description": "官方商品图 CDN 地址（对应 MCP 的 productImage 字段，套餐子项通常为空）。⚠️ 仅供**左栏数据实例**辨认订单用，模板禁止引用——checkTemplate 会静态拦截，因此它绝不会进小票，也就不存在 canvas 跨域问题。无图时为 null。" },
+          "obtained": { "type": "boolean", "description": "是否已获得（活动/联名/周边类用）。界面只展示已获得条目" }
+        }
+      }
+    },
+    "amounts": {
+      "type": "object",
+      "description": "金额汇总。引擎会在 items 变动时自动重算 subtotal / total",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["items", "order", "detail"],
+          "default": "items",
+          "description": "items=小计由 Σ items[].amount 算出；order=整单金额模式（历史订单无明细，品项不分摊）；detail=明细版（有单品单价，展示 listPrice → discount → total 三段式）"
+        },
+        "listPrice": { "type": "number", "description": "原价合计（明细版用，来自 query-order.totalAmount）" },
+        "subtotal": { "type": "number", "description": "小计（items 模式 = Σ items[].amount；order 模式为整单金额）" },
+        "discount": { "type": "number", "description": "优惠金额（来自 calculate-price / query-order.totalDiscountAmount）" },
+        "delivery": { "type": "number", "description": "配送费（到店场景为 0）" },
+        "total": { "type": "number", "description": "合计（引擎自动 = subtotal - discount + delivery）" },
+        "currency": { "type": "string", "default": "CNY" }
+      }
+    },
+    "fees": {
+      "type": "object",
+      "description": "费用拆分（明细版用，来自 query-order）",
+      "properties": {
+        "productPrice": { "type": "number", "description": "商品金额" },
+        "packing": { "type": "number", "description": "打包费" },
+        "delivery": { "type": "number", "description": "配送费" },
+        "tableware": { "type": "number", "description": "餐具费" }
+      }
+    },
+    "coupons": {
+      "type": "array",
+      "description": "优惠明细（来自 query-order.couponList / query-my-coupons），可空",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "amount": { "type": "number" }
+        }
+      }
+    },
+    "member": {
+      "type": "object",
+      "description": "会员信息（来自 query-my-account）",
+      "properties": {
+        "points": { "type": "number", "description": "可用积分" },
+        "no": { "type": "string", "description": "会员编号（D-032）：由 MCP 的 accountId 裁出前 8 位，形如 No.04F0-484B；签名区的真实凭据" },
+        "level": { "type": "string", "description": "会员等级文案（可选）" }
+      }
+    },
+    "journal": {
+      "type": "object",
+      "description": "手账核心区：用户在页面上最常改的就是这里",
+      "properties": {
+        "mood": { "type": "string", "description": "【已废弃 · D-031】心情 emoji。v0.3.5 起已从全部模板与界面移除，仅保留字段以兼容旧工程包回放；新数据不再产出" },
+        "moodLabel": { "type": "string", "description": "手账区的文字标签，如「麦麦的安慰」（原心情文字描述）" },
+        "note": { "type": "string", "description": "碎碎念，支持多行（data-kind=\"note\"）" },
+        "rating": { "type": "number", "description": "本次体验评分 1-5（可选）" },
+        "weather": { "type": "string", "description": "天气（可选）" },
+        "with": { "type": "string", "description": "同行的人（可选）" },
+        "signature": { "type": "string", "description": "署名（可选，配合头像）" }
+      }
+    },
+    "summary": {
+      "type": "array",
+      "description": "聚合摘要行（非点单类小票用，如积分存折的「可用/累计/已用」）。模板用 data-repeat=\"summary\"，行内字段 label/value",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string", "description": "名目" },
+          "value": { "type": "string", "description": "数值（已格式化好的字符串）" }
+        }
+      }
+    },
+    "stats": {
+      "type": "array",
+      "description": "趣味统计行（趣味数据小票用，如「最贵一单」「门店足迹」）。模板用 data-repeat=\"stats\"，行内字段 label/value/hint",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string", "description": "统计名目" },
+          "value": { "type": "string", "description": "统计值（已格式化）" },
+          "hint": { "type": "string", "description": "补充说明（可选）" }
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "description": "【v0.3.0】栏位状态（三层可换模型的 L1）。引擎按此显隐与排序 data-block 区块；lock 栏位强制可见",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string", "description": "对应模板里的 data-block 值" },
+          "visible": { "type": "boolean", "default": true },
+          "order": { "type": "number", "description": "同父容器内的排序序号" }
+        }
+      }
+    },
+    "paper": {
+      "type": "object",
+      "description": "历史点单小票的纸型；旧工程缺省时使用标准长条",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string", "enum": ["strip", "scallop", "tearoff"] }
+      }
+    },
+    "skin": {
+      "type": "object",
+      "description": "【v0.3.0】皮肤（三层可换模型的 L2）。vars 为 CSS 变量组，覆盖模板默认值",
+      "properties": {
+        "id": { "type": "string", "description": "皮肤 id（见 src/decos/skins.json）" },
+        "vars": { "type": "object", "description": "CSS 变量表，键名须以 --rct- 开头" }
+      }
+    },
+    "deco": {
+      "type": "array",
+      "description": "【v0.3.0】装饰（三层可换模型的 L3）。落在模板的 data-slot 槽位上；素材全部为内置预设（不提供上传）",
+      "items": {
+        "type": "object",
+        "required": ["slot", "id"],
+        "properties": {
+          "slot": { "type": "string", "description": "模板里的 data-slot 值，如 band / header-art / rule / watermark / stamp / sticker" },
+          "id": { "type": "string", "description": "素材 id（见 src/decos/deco.json）；为空表示清空该槽位" }
+        }
+      }
+    },
+    "avatar": {
+      "type": "object",
+      "description": "【v0.3.4 起停用，见 D-030】头像。界面已移除头像入口，默认不注入。字段保留仅为兼容旧工程包回放。",
+      "properties": {
+        "kind": { "type": "string", "enum": ["builtin", "none"], "default": "none" },
+        "id": { "type": "string", "description": "内置头像 id（见 src/decos/avatars.json）" }
+      }
+    }
+  }
+}

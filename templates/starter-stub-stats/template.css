@@ -1,0 +1,166 @@
+/* ==========================================================================
+   占位模板 · 数据存根
+   作用域根：.rct-scope--starter-stub-stats
+   承接：积分存折 / 趣味统计
+   美术设计待接入：视觉可整体替换，结构（data-field / data-repeat 标注）保持不变。
+   ========================================================================== */
+
+.rct-scope--starter-stub-stats .rct-stub {
+  width: 360px;
+  padding: 22px 24px 18px;
+  background: #fff;
+  color: #2f2a24;
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-shadow: 0 16px 38px rgba(47, 42, 36, .16);
+  border-radius: 4px;
+  position: relative;
+}
+
+/* 头部徽标（美术占位） */
+.rct-scope--starter-stub-stats .rct-stub__mark {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #b3aba0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.rct-scope--starter-stub-stats .rct-stub__subtitle {
+  text-align: center;
+  font-size: 11px;
+  color: #8b8378;
+  margin-top: 4px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__summary {
+  margin: 16px 0 0;
+  padding: 12px 0;
+  border-top: 1px solid #e6e0d6;
+  border-bottom: 1px solid #e6e0d6;
+}
+.rct-scope--starter-stub-stats .rct-stub__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 3px 0;
+}
+.rct-scope--starter-stub-stats .rct-stub__summary-row dt { font-size: 12px; color: #8b8378; }
+.rct-scope--starter-stub-stats .rct-stub__summary-row dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__stats {
+  margin: 14px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.rct-scope--starter-stub-stats .rct-stub__stat {
+  padding: 10px 12px;
+  background: #faf8f4;
+  border-radius: 8px;
+  border-left: 3px solid #d7261e;
+}
+.rct-scope--starter-stub-stats .rct-stub__stat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.rct-scope--starter-stub-stats .rct-stub__stat-label { font-size: 11px; color: #8b8378; }
+.rct-scope--starter-stub-stats .rct-stub__stat-value { font-size: 15px; font-weight: 700; }
+.rct-scope--starter-stub-stats .rct-stub__stat-hint {
+  margin-top: 3px;
+  font-size: 10px;
+  color: #a89f92;
+  line-height: 1.5;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__items { margin: 14px 0 0; }
+.rct-scope--starter-stub-stats .rct-stub__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 0;
+  border-bottom: 1px dotted #e6e0d6;
+}
+.rct-scope--starter-stub-stats .rct-stub__item-name { font-size: 13px; }
+.rct-scope--starter-stub-stats .rct-stub__item-spec { font-size: 10px; color: #a89f92; }
+
+.rct-scope--starter-stub-stats .rct-stub__rule {
+  border-top: 1px dashed #e6e0d6;
+  margin: 16px 0 12px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__journal {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.rct-scope--starter-stub-stats .rct-stub__journal-main { flex: 1 1 auto; }
+.rct-scope--starter-stub-stats .rct-stub__mood-label { font-size: 11px; color: #8b8378; }
+.rct-scope--starter-stub-stats .rct-stub__note {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif;
+  font-size: 13px;
+  line-height: 1.75;
+  min-height: 34px;
+  margin-top: 2px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__no {
+  display: inline-block;
+  margin: 0 0 6px;
+  font-family: ui-monospace, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 10px;
+  color: #a89f92;
+  letter-spacing: 1px;
+}
+
+/* ================= v0.4.1 票头 / 票尾分层（D-032 / D-034）=================
+   与专属模板同一套层次语言：水印 · 装饰条 · 头图 · 分割线 · 字标 · 签名区 */
+
+.rct-scope--starter-stub-stats .rct-stub { isolation: isolate; }
+
+.rct-scope--starter-stub-stats .rct-stub__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: #8b8378; opacity: .34;
+}
+.rct-scope--starter-stub-stats .rct-stub__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-stub-stats .rct-stub__band { height: 10px; color: #d7261e; opacity: .75; }
+.rct-scope--starter-stub-stats .rct-stub__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-stub-stats .rct-stub__band--head { margin: -22px -24px 12px; }
+.rct-scope--starter-stub-stats .rct-stub__band--foot { margin: 0 -24px -18px; }
+
+.rct-scope--starter-stub-stats .rct-stub__art { height: 40px; margin: 0 0 6px; color: #d7261e; opacity: .7; }
+.rct-scope--starter-stub-stats .rct-stub__art svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--starter-stub-stats .rct-stub__rule { height: 8px; margin-top: 10px; color: #d7261e; opacity: .65; }
+.rct-scope--starter-stub-stats .rct-stub__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--starter-stub-stats .rct-stub__rule--foot { margin: 0 0 10px; }
+
+.rct-scope--starter-stub-stats .rct-stub__brand {
+  font-size: 12px; font-weight: 800; letter-spacing: 5px; text-indent: 5px;
+  text-align: center; margin-bottom: 4px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed #ddd6c8; }
+.rct-scope--starter-stub-stats .rct-stub__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--starter-stub-stats .rct-stub__sign-k { color: #8b8378; font-size: 10px; letter-spacing: 1px; }
+.rct-scope--starter-stub-stats .rct-stub__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--starter-stub-stats .rct-stub__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+.rct-scope--starter-stub-stats .rct-stub__foot { margin-top: 12px; text-align: center; }

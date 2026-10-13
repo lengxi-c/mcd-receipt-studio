@@ -1,0 +1,117 @@
+<!--
+  占位模板 · 经典收银小票（结构示例，美术设计待接入）
+  ---------------------------------------------------
+  契约要点（详见 docs/美术接入指南.md）：
+   · 不要自己写 .rct-scope 容器，引擎会自动包裹
+   · 取数用 data-field="<路径>"；循环用 data-repeat + data-repeat-item
+   · 循环体内的字段用裸名（name / qty / amount）
+   · 条件显示用 data-if，金额格式用 data-format="money"
+   · 模板内禁止出现 <script>
+
+  v0.4.1 分层（D-032 / D-034）：
+   水印 → 装饰条 → 头图 → 分割线 → 抬头（字标 / 店名 / 地址）→ …正文… → 签名区 → 票尾分割线 → 尾图收边
+  （已移除页脚免责声明与 slogan 横条：这是文创虚构小票，不承担凭证职能）
+-->
+<div class="rct-classic">
+
+  <!-- 纸面层：绝对定位垫底，底部让出 10px 撕纸带（导出安全，见 D-039） -->
+  <div class="rct-classic__paper" data-editable="false"></div>
+
+  <div class="rct-classic__watermark" data-slot="watermark" data-editable="false"></div>
+
+  <div class="rct-classic__perf" data-editable="false"></div>
+
+  <header class="rct-classic__head">
+    <div class="rct-classic__band rct-classic__band--head" data-slot="band" data-editable="false"></div>
+    <div class="rct-classic__art" data-slot="header-art" data-editable="false"></div>
+    <div class="rct-classic__rule" data-slot="rule" data-editable="false"></div>
+    <div class="rct-classic__brand" data-field="meta.brand" data-editable="false">麦门日记</div>
+    <div class="rct-classic__mark" data-editable="false">✦ 麦门小票 ✦</div>
+    <div class="rct-classic__store" data-field="store.name">麦当劳 · 示例门店</div>
+    <div class="rct-classic__addr" data-field="store.address">示例地址</div>
+    <div class="rct-classic__tel" data-field="store.phone">顾客中心 400-920-0205</div>
+  </header>
+
+  <dl class="rct-classic__meta">
+    <div class="rct-classic__meta-row">
+      <dt>单号</dt>
+      <dd data-field="meta.receiptNo">—</dd>
+    </div>
+    <div class="rct-classic__meta-row">
+      <dt>时间</dt>
+      <dd data-field="order.datetime" data-format="datetime">—</dd>
+    </div>
+    <div class="rct-classic__meta-row">
+      <dt>方式</dt>
+      <dd data-field="order.takeWay">到店自取</dd>
+    </div>
+  </dl>
+
+  <div class="rct-classic__hr" data-editable="false"></div>
+
+  <ul class="rct-classic__items" data-repeat="items">
+    <li class="rct-classic__item" data-repeat-item>
+      <span class="rct-classic__item-name" data-field="name">品项</span>
+      <span class="rct-classic__item-qty" data-field="qty" data-format="qty">1</span>
+      <span class="rct-classic__item-amt" data-field="amount" data-format="money">0.00</span>
+    </li>
+  </ul>
+
+  <div class="rct-classic__hr" data-editable="false"></div>
+
+  <div class="rct-classic__sum">
+    <div class="rct-classic__sum-row">
+      <span>小计</span><span data-field="amounts.subtotal" data-format="money">0.00</span>
+    </div>
+    <div class="rct-classic__sum-row" data-if="amounts.discount">
+      <span>优惠</span><span data-field="amounts.discount" data-format="money">0.00</span>
+    </div>
+    <div class="rct-classic__sum-row rct-classic__sum-row--total">
+      <span>合计</span><span data-field="amounts.total" data-format="money">0.00</span>
+    </div>
+  </div>
+
+  <div class="rct-classic__hr" data-editable="false"></div>
+
+  <section class="rct-classic__journal">
+    <div class="rct-classic__mood-label" data-field="journal.moodLabel">今天的心情</div>
+    <p class="rct-classic__note" data-field="journal.note" data-kind="note">点这里写两句碎碎念……</p>
+  </section>
+
+  <!-- 签名区：会员编号取自 MCP accountId（真实数据），签名与日期供落款 -->
+  <section class="rct-classic__sign">
+    <div class="rct-classic__points" data-field="member.points" data-format="points">积分 —</div>
+    <div class="rct-classic__sign-row">
+      <span class="rct-classic__sign-k" data-editable="false">会员编号</span>
+      <span class="rct-classic__sign-v" data-field="member.no" data-editable="false">No. —</span>
+    </div>
+    <div class="rct-classic__sign-row">
+      <span class="rct-classic__sign-k" data-editable="false">签名</span>
+      <span class="rct-classic__sign-v rct-classic__sign-v--hand" data-field="journal.signature">—— 麦门日记</span>
+    </div>
+    <div class="rct-classic__sign-row">
+      <span class="rct-classic__sign-k" data-editable="false">日期</span>
+      <span class="rct-classic__sign-v" data-field="order.datetime" data-format="date">—</span>
+    </div>
+    <div class="rct-classic__barcode" data-editable="false"></div>
+  </section>
+
+  <footer class="rct-classic__foot">
+    <div class="rct-classic__rule rct-classic__rule--foot" data-slot="rule" data-editable="false"></div>
+    <div class="rct-classic__band rct-classic__band--foot" data-slot="band" data-editable="false"></div>
+  </footer>
+
+  <!-- 底部撕纸带：内联 SVG 竖条（6px 纸 / 6px 空）。
+       v0.4.5 起不再用 CSS mask —— mask 在 PNG 导出链路里被 html2canvas 静默忽略，
+       页面看着有锯齿、导出的图却是硬直边（D-039）。内联 SVG 两种场景都保得住。 -->
+  <div class="rct-classic__perf rct-classic__perf--bottom" data-export-probe="tear" data-editable="false">
+    <svg viewBox="0 0 320 10" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="rct-classic-tear" patternUnits="userSpaceOnUse" width="12" height="10">
+          <rect width="6" height="10" fill="#fdfdfa"/>
+        </pattern>
+      </defs>
+      <rect width="320" height="10" fill="url(#rct-classic-tear)"/>
+    </svg>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "_comment": "麦门日记 · MCP 配置示例（脱敏版）。请复制为 mcp-config.local.json 并填入真实 Token，切勿提交真实 Token。",
+  "mcpServers": {
+    "mcd-mcp": {
+      "type": "streamablehttp",
+      "url": "https://mcp.mcd.cn",
+      "headers": {
+        "Authorization": "Bearer ${MCD_MCP_TOKEN}"
+      }
+    }
+  }
+}

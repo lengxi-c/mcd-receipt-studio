@@ -1,0 +1,92 @@
+{
+  "_comment": "皮肤预设（三层可换模型的 L2）。模板只写 var(--rct-*)，换皮肤即换变量。全部为占位级色板，正式色板由美术产出后替换。",
+  "version": 1,
+  "skins": [
+    {
+      "id": "thermal-white",
+      "name": "热敏纸白",
+      "vars": {
+        "--rct-paper": "#fdfdfa",
+        "--rct-ink": "#2b2b2b",
+        "--rct-ink-weak": "#8b8378",
+        "--rct-accent": "#d7261e",
+        "--rct-line": "#c9c9c4",
+        "--rct-texture": "none"
+      }
+    },
+    {
+      "id": "kraft",
+      "name": "牛皮纸",
+      "vars": {
+        "--rct-paper": "#f3e6cf",
+        "--rct-ink": "#4a3a26",
+        "--rct-ink-weak": "#8a7659",
+        "--rct-accent": "#a05a2c",
+        "--rct-line": "#d8c3a0",
+        "--rct-texture": "repeating-linear-gradient(0deg, rgba(160,90,44,.05) 0 1px, transparent 1px 3px)"
+      }
+    },
+    {
+      "id": "cream-note",
+      "name": "米黄便签",
+      "vars": {
+        "--rct-paper": "#fdf6e3",
+        "--rct-ink": "#3c3836",
+        "--rct-ink-weak": "#9a9080",
+        "--rct-accent": "#c25b3a",
+        "--rct-line": "#e6d9bd",
+        "--rct-texture": "repeating-linear-gradient(0deg, rgba(194,91,58,.07) 0 1px, transparent 1px 22px)"
+      }
+    },
+    {
+      "id": "cool-grey",
+      "name": "冷灰格纸",
+      "vars": {
+        "--rct-paper": "#f7f8fa",
+        "--rct-ink": "#2f3540",
+        "--rct-ink-weak": "#8a93a3",
+        "--rct-accent": "#2f4a5c",
+        "--rct-line": "#d7dce4",
+        "--rct-texture": "repeating-linear-gradient(0deg, rgba(47,74,92,.06) 0 1px, transparent 1px 14px), repeating-linear-gradient(90deg, rgba(47,74,92,.06) 0 1px, transparent 1px 14px)"
+      }
+    },
+    {
+      "id": "sakura-pink",
+      "name": "樱花粉纸",
+      "vars": {
+        "--rct-paper": "#f7e8eb",
+        "--rct-ink": "#463139",
+        "--rct-ink-weak": "#795d67",
+        "--rct-accent": "#a84863",
+        "--rct-line": "#dcc5cc",
+        "--rct-texture": "repeating-linear-gradient(0deg, rgba(168,72,99,.04) 0 1px, transparent 1px 18px)"
+      }
+    },
+    {
+      "id": "vintage-matte",
+      "name": "复古磨砂",
+      "textureFile": "textures/vintage-matte.png",
+      "vars": {
+        "--rct-paper": "#eee3bf",
+        "--rct-ink": "#343029",
+        "--rct-ink-weak": "#6f6858",
+        "--rct-accent": "#7b4940",
+        "--rct-line": "#c5b795",
+        "--rct-texture": "none"
+      }
+    },
+    {
+      "id": "cool-grey-white",
+      "name": "冷灰白纸",
+      "textureFile": "textures/cool-grey-white.png",
+      "vars": {
+        "--rct-paper": "#f2f3f1",
+        "--rct-ink": "#2d3030",
+        "--rct-ink-weak": "#666d6e",
+        "--rct-accent": "#414d4f",
+        "--rct-line": "#cbd0cf",
+        "--rct-texture": "none"
+      }
+    }
+  ]
+}

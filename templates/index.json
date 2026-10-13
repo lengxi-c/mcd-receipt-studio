@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "note": "模板注册表。当前仅启用历史点单、积分存折、趣味统计三类来源；已停用来源的旧模板归档于 archive/retired-data-sources/templates/，不参与构建。后 4 套 starter-* 保留作兜底与契约示例（决策 DP-5）。",
+  "templates": [
+    { "id": "order-receipt", "order": 1, "note": "专属①：历史点单小票·明细版。美术设计待接入" },
+    { "id": "points-passbook", "order": 2, "note": "专属②：积分存折。美术设计待接入" },
+    { "id": "fun-resume", "order": 3, "note": "专属③：麦门履历。美术设计待接入" },
+    { "id": "starter-classic", "order": 4, "note": "兜底占位：等宽收银小票（契约示例）" },
+    { "id": "starter-retro", "order": 5, "note": "兜底占位：复古点单存根（契约示例）" },
+    { "id": "starter-note", "order": 6, "note": "兜底占位：碎碎念留言条（契约示例）" },
+    { "id": "starter-stub-stats", "order": 7, "note": "兜底占位：数据存根（契约示例）" }
+  ]
+}

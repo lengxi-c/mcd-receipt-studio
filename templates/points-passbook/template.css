@@ -1,0 +1,78 @@
+/* 积分存折 —— 占位视觉（美术待接入） 作用域根：.rct-scope--points-passbook */
+
+.rct-scope--points-passbook .rcpt {
+  position: relative; width: 320px; padding: 20px 18px 22px;
+  background: var(--rct-paper, #f7f4ec); background-image: var(--rct-texture, none);
+  color: var(--rct-ink, #2b2b2b); border-radius: 8px;
+  border-left: 6px solid var(--rct-accent, #a05a2c);
+  box-shadow: 0 14px 34px rgba(47, 42, 36, .16);
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px; line-height: 1.6;
+}
+.rct-scope--points-passbook .rcpt__head { text-align: center; }
+.rct-scope--points-passbook .rcpt__art { height: 26px; margin: -6px -4px 6px; color: var(--rct-accent, #a05a2c); opacity: .5; }
+.rct-scope--points-passbook .rcpt__art svg { width: 100%; height: 100%; display: block; }
+.rct-scope--points-passbook .rcpt__badge { display: inline-block; padding: 2px 10px; border: 1px dashed var(--rct-accent, #a05a2c); border-radius: 999px; color: var(--rct-accent, #a05a2c); font-size: 11px; }
+.rct-scope--points-passbook .rcpt__title { margin: 8px 0 0; font-size: 17px; letter-spacing: 2px; }
+.rct-scope--points-passbook .rcpt__sub { color: var(--rct-ink-weak, #8b8378); font-size: 11px; }
+
+.rct-scope--points-passbook .rcpt__balance { margin-top: 14px; padding: 14px; border: 1px solid var(--rct-line, #ddd6c8); border-radius: 12px; background: rgba(255, 255, 255, .5); text-align: center; }
+.rct-scope--points-passbook .rcpt__balance-label { color: var(--rct-ink-weak, #8b8378); font-size: 11px; }
+.rct-scope--points-passbook .rcpt__balance-value { font-size: 40px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+.rct-scope--points-passbook .rcpt__summary { margin: 14px 0 0; }
+.rct-scope--points-passbook .rcpt__summary-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted var(--rct-line, #ddd6c8); }
+.rct-scope--points-passbook .rcpt__summary-row dt { color: var(--rct-ink-weak, #8b8378); }
+.rct-scope--points-passbook .rcpt__summary-row dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.rct-scope--points-passbook .rcpt__stats { margin: 12px 0 0; padding: 0; list-style: none; }
+.rct-scope--points-passbook .rcpt__stat { padding: 8px 0; border-bottom: 1px dashed var(--rct-line, #ddd6c8); }
+.rct-scope--points-passbook .rcpt__stat:last-child { border-bottom: none; }
+.rct-scope--points-passbook .rcpt__stat-label { color: var(--rct-ink-weak, #8b8378); font-size: 11px; }
+.rct-scope--points-passbook .rcpt__stat-value { float: right; font-weight: 700; }
+.rct-scope--points-passbook .rcpt__stat-hint { display: block; color: var(--rct-ink-weak, #8b8378); font-size: 10px; }
+
+.rct-scope--points-passbook .rcpt__journal { display: flex; gap: 10px; margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--rct-line, #ddd6c8); }
+.rct-scope--points-passbook .rcpt__journal-main { flex: 1 1 auto; min-width: 0; }
+.rct-scope--points-passbook .rcpt__mood-label { font-weight: 600; }
+.rct-scope--points-passbook .rcpt__note { margin: 4px 0 0; color: var(--rct-ink-weak, #8b8378); font-size: 11px; }
+.rct-scope--points-passbook .rcpt__stamp { width: 50px; height: 50px; margin: 2px auto 6px; color: var(--rct-accent, #a05a2c); opacity: .8; transform: rotate(-10deg); }
+.rct-scope--points-passbook .rcpt__stamp svg { width: 100%; height: 100%; display: block; }
+.rct-scope--points-passbook [data-block][data-block-visible="false"] { display: none; }
+
+/* ================= v0.4.0 票头 / 票尾分层（D-032）=================
+   水印 · 装饰条 · 分割线 · 字标 · slogan 横条 · 签名区
+   分层思路：占位状态下就要有层次，不必等美术；每一层同时是一个可换槽位。 */
+
+.rct-scope--points-passbook .rcpt { isolation: isolate; }   /* 建立层叠上下文，水印的 z-index:-1 才被关在票内 */
+
+.rct-scope--points-passbook .rcpt__watermark {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; overflow: hidden; pointer-events: none;
+  color: var(--rct-ink-weak, #8b8378); opacity: .38;
+}
+.rct-scope--points-passbook .rcpt__watermark svg { width: 100%; height: 100%; display: block; }
+
+.rct-scope--points-passbook .rcpt__band { height: 10px; color: var(--rct-accent, #d7261e); opacity: .8; }
+.rct-scope--points-passbook .rcpt__band svg { width: 100%; height: 100%; display: block; }
+.rct-scope--points-passbook .rcpt__band--head { margin: -20px -18px 12px; }
+.rct-scope--points-passbook .rcpt__band--foot { margin: 0 -18px -22px; }
+
+.rct-scope--points-passbook .rcpt__rule { height: 8px; margin-top: 12px; color: var(--rct-accent, #d7261e); opacity: .7; }
+.rct-scope--points-passbook .rcpt__rule svg { width: 100%; height: 100%; display: block; }
+.rct-scope--points-passbook .rcpt__rule--foot { margin: 0 0 12px; }
+
+.rct-scope--points-passbook .rcpt__art { height: 44px; margin: 4px 0 8px; }
+.rct-scope--points-passbook .rcpt__brand { font-size: 13px; font-weight: 800; letter-spacing: 5px; text-indent: 5px; }
+.rct-scope--points-passbook .rcpt__badge { margin-top: 2px; }
+.rct-scope--points-passbook .rcpt__sign { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--rct-line, #c9c9c4); }
+.rct-scope--points-passbook .rcpt__sign-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 2px 0; }
+.rct-scope--points-passbook .rcpt__sign-k { color: var(--rct-ink-weak, #8b8378); font-size: 10px; letter-spacing: 1px; }
+.rct-scope--points-passbook .rcpt__sign-v { font-variant-numeric: tabular-nums; }
+.rct-scope--points-passbook .rcpt__sign-v--hand {
+  font-family: "Kaiti SC", KaiTi, STKaiti, "Microsoft YaHei", serif; font-style: italic; font-size: 13px; letter-spacing: .5px;
+}
+
+/* ---- 票尾（v0.4.1：只剩 分割线 + 尾图）---- */
+.rct-scope--points-passbook .rcpt__foot { margin-top: 14px; text-align: center; }
+.rct-scope--points-passbook .rcpt__points { margin-top: 6px; color: var(--rct-ink-weak, #8b8378); font-size: 11px; }
