@@ -16,6 +16,10 @@
 > ⚠️ **本项目为麦当劳程序员节创意开发大赛参赛作品，由参赛者独立开发，非麦当劳官方产品。**
 > 生成的小票为**创意虚构产物**，仅用于个人手账与文创创作，**不可用作任何真实消费凭证**。
 
+> 💡 **想用它做自己的小票？** 两条路先分清：
+> **只想看看效果** → 直接开[在线体验](https://lengxi-c.github.io/mcd-receipt-studio/)（内置示例数据，零安装零 Token）；
+> **想用自己的真实订单** → 需要先接一次麦当劳 MCP，见[快速开始](#快速开始)（约 1 分钟）。
+
 ---
 
 ## 30 秒看懂
@@ -87,14 +91,15 @@
 
 ## 快速开始
 
-### 方式一：在线体验（零安装、零 Token）
+> ⚠️ **先分清两条路，别走岔了** —— 这两条用的**不是同一份数据**：
+> - **只想看看它长什么样** → 走「看演示」：读仓库内置的示例订单（虚构门店），30 秒上手，什么都不用装
+> - **想生成属于自己的小票** → 走「正式使用」：需要先接一次麦当劳 MCP，之后才读得到你自己吃过的那些顿
 
-**🌐 <https://lengxi-c.github.io/mcd-receipt-studio/>**
+### 看演示 · 内置示例数据（30 秒 · 零安装零 Token）
 
-页面是**静态快照**，浏览器打开即可点选数据、改栏位、换纸色纸形、贴装饰。
-（仓库已开启 GitHub Pages；若该链接尚未生效，用下面的方式二。）
+**在线版（推荐）**：🌐 <https://lengxi-c.github.io/mcd-receipt-studio/>
 
-### 方式二：下载后双击打开
+**本地版**：
 
 ```bash
 git clone https://github.com/lengxi-c/mcd-receipt-studio
@@ -103,24 +108,35 @@ start index.html          # Windows
 open  index.html          # macOS
 ```
 
-内置示例数据集，开箱即用：左侧数据源、中间小票舞台、右侧编辑与装饰面板，全部可交互。
+两个都是**同一个页面**（仓库根目录的 `index.html`，静态快照）：左栏数据源、中间小票舞台、右栏编辑与装饰，
+全部可交互 —— 点数据、改文字、换纸色纸形、贴装饰、下载 PNG 都能玩。
 
-### 方式三：用你自己的真实数据生成
+> ⚠️ **但它读的是内置示例数据**（示例订单、虚构门店），**看不到你自己的订单**。
+> 想用自己的真实记录 → 往下看「正式使用」。
 
-1. 申请麦当劳 MCP Token：<https://open.mcd.cn/mcp>（手机号登录 → 控制台 → 激活）
-2. 复制 `mcp-config.example.json` 为 `mcp-config.local.json`，替换 `${MCD_MCP_TOKEN}`
+### 正式使用 · 生成属于你自己的小票
+
+**第一步：接一次麦当劳 MCP**（只需一次，之后一直有效）
+
+1. 申请麦当劳 MCP Token：<https://open.mcd.cn/mcp>（手机号登录 → 右上角「控制台」→「激活」→ 复制）
+2. 复制 `mcp-config.example.json` 为 `mcp-config.local.json`，把 `${MCD_MCP_TOKEN}` 换成你复制的 Token
    （**已在 `.gitignore` 中，不会被提交**）
-3. 在 WorkBuddy / Cherry Studio / Cursor 等 MCP Client 中启用 `mcd-mcp`
-4. 对 Agent 说一句话：
+3. 在 WorkBuddy / Cherry Studio / Cursor 等 MCP Client 中**启用** `mcd-mcp`
 
-```
+**第二步：对 Agent 说一句话**
+
+```text
 把我吃过的麦当劳做成小票
 ```
 
 Agent 会按 [`SKILL.md`](./SKILL.md) 的流程：拉 `order-list` → **对每一单调 `query-order`** → 组装数据集
-→ `node cli.js build --workspace` 生成三栏工作台页面。
+→ `node cli.js build --workspace` 生成**属于你的**三栏工作台页面。
 
-### 方式四：命令行（开发者）
+> 💡 **没接 MCP 就把仓库地址丢给 AI 会怎样？** 不会卡住 —— Agent 会先用大白话告诉你要装什么、怎么装
+> （见 [`SKILL.md`](./SKILL.md) 的「〇、开工前」一节），不甩术语。
+> 你也可以先让它**用示例数据做一张**给你看看效果。
+
+### 命令行（开发者）
 
 零依赖，只需 Node ≥ 18：
 
